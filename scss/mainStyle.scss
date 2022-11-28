@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      text-decoration: none;
+      //color: black;
+    }
+  }
+}
+@import "./variables.scss";
+@import "./sidePanel.scss";
+@import "./boardPanel.scss";
+
+.navbar {
+  height: 55px;
+  background-color: $navbarBackgroundColor;
+  .nav-icons-before {
+    margin-left: 1.5em;
+    #app-logo {
+      font-family: "Indie Flower", cursive;
+      font-size: 23px;
+    }
+    .menu-img {
+      padding: 5px;
+    }
+  }
+  .search-input {
+    width: 212px;
+    margin-left: -49em;
+    background-color: #cfc9c96b;
+    border: 1px solid #80808008;
+    color: white;
+  }
+}
+

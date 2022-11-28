@@ -1,0 +1,182 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+* ul {
+  padding-left: 0;
+}
+* ul li {
+  list-style: none;
+  text-decoration: none;
+}
+
+.side-panel {
+  background-color: #fafafa;
+  height: 770px;
+  margin-left: 2em;
+  margin-top: 1px;
+}
+.side-panel .main-menu-list {
+  margin-top: 24px;
+}
+.side-panel .main-menu-list .list-item {
+  padding: 10px;
+}
+.side-panel .main-menu-list .list-item a {
+  margin-left: 10px;
+  color: grey;
+}
+.side-panel .main-menu-list .list-item a:hover {
+  text-decoration: none;
+}
+.side-panel .main-menu-list .list-item .note-counts {
+  float: right;
+  margin-right: 10px;
+}
+.side-panel .main-menu-list .list-item:hover {
+  cursor: pointer;
+  background-color: rgb(209, 209, 209);
+  border-radius: 8%;
+  border-top-right-radius: 280px;
+  border-bottom-right-radius: 200px;
+}
+.side-panel .costumes-container {
+  margin-left: 0.1em;
+}
+.side-panel .costumes-container .costumes {
+  padding: 10px;
+}
+.side-panel .costumes-container .costumes .add-category {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+}
+.side-panel .costumes-container .costumes .add-category a {
+  color: #c95549;
+}
+.side-panel .costumes-container .projects-list {
+  margin-left: -0.6em;
+  margin-top: 8px;
+}
+.side-panel .costumes-container .projects-list li {
+  padding: 10px;
+}
+.side-panel .costumes-container .projects-list li:hover {
+  cursor: pointer;
+  background-color: rgb(209, 209, 209);
+  border-radius: 8%;
+  border-top-right-radius: 300px;
+  border-bottom-right-radius: 200px;
+}
+.side-panel .costumes-container .projects-list a {
+  margin-left: 10px;
+  color: grey;
+}
+.side-panel .costumes-container .projects-list a:hover {
+  text-decoration: none;
+}
+.side-panel .modal-body input {
+  border: none;
+}
+
+.project-page {
+  margin-left: 2em;
+  margin-top: 28px;
+}
+.project-page .input-list {
+  margin-left: 1em;
+}
+.project-page .input-list .input-field {
+  border: none;
+  margin-left: 10px;
+}
+.project-page .input-list .add-task-plus {
+  font-size: 20px;
+  color: #c95549;
+}
+.project-page .project-list {
+  margin-top: 3em;
+}
+.project-page .project-list .list-tittle {
+  display: inline-flex;
+}
+.project-page .project-list .list-tittle .task-number {
+  position: relative;
+  margin-left: 10px;
+  font-size: 15px;
+  top: 3px;
+}
+.project-page .project-list .btn-outline-secondary {
+  border-radius: 1em;
+  font-size: 10px;
+}
+.project-page .project-list .input-task {
+  margin-left: 1em;
+}
+.project-page .project-list .input-task .input-field {
+  border: none;
+  margin-left: 10px;
+}
+.project-page .project-list .input-task .add-task-plus {
+  font-size: 20px;
+  color: #c95549;
+}
+.project-page .project-list-completed {
+  margin-top: 3em;
+}
+.project-page .project-list-completed .ul-list-completed {
+  margin-left: 3em;
+}
+.project-page .project-list-completed .ul-list-completed li {
+  text-decoration: line-through;
+}
+
+.pages .p-tittle {
+  position: absolute;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+.pages .create-list-input {
+  margin-left: 1em;
+}
+.pages .create-list-input .list-input {
+  border: none;
+  margin-left: 1em;
+}
+.pages .list-tittle {
+  position: absolute;
+  margin-top: 11em;
+  margin-left: 2em;
+}
+.pages .input-task {
+  margin-left: 1em;
+}
+.pages .input-task .input-field {
+  border: none;
+  margin-left: 1em;
+}
+
+.navbar {
+  height: 55px;
+  background-color: #c95549;
+}
+.navbar .nav-icons-before {
+  margin-left: 1.5em;
+}
+.navbar .nav-icons-before #app-logo {
+  font-family: "Indie Flower", cursive;
+  font-size: 23px;
+}
+.navbar .nav-icons-before .menu-img {
+  padding: 5px;
+}
+.navbar .search-input {
+  width: 212px;
+  margin-left: -49em;
+  background-color: rgba(207, 201, 201, 0.4196078431);
+  border: 1px solid rgba(128, 128, 128, 0.031372549);
+  color: white;
+}
+
+/*# sourceMappingURL=mainStyle.css.map */

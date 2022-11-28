@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/mainStyle.css">
+    <title>Todo TraiNING App</title>
+</head>
+<body>
+    <nav class="navbar navbar-light">
+        <div class="nav-icons-before">
+            <span id="app-logo"><img class="menu-img" src="./icons/menu_icon.png" alt=""> Tdo Aplication</span>
+        </div>
+        <input class="form-control search-input" type="text" placeholder="Pesquisar...">
+        <button type="button" class="btn btn-primary">Pesquisar</button>
+    </nav>
+    <div class="row">
+<!-- SIDE PANEL -->
+        <div class="col-sm-3 side-panel" >
+            <ul class="main-menu-list">
+                <li class="list-item" id="inbox"><img src="./icons/inbox_icon.png" alt="inboxicon"><a href="#">Inbox </a><span class="note-counts">2</span></li>
+                <li class="list-item" id="today"><img src="./icons/calendar_today.png" alt="calendaricon"><a href="#">Today </a><span class="note-counts">2</span></li>
+                <li class="list-item" id="upcoming"><img src="./icons/calendar_icon.png" alt="calendaricon"><a href="#">Upcoming </a><span class="note-counts">2</span></li>
+            </ul>
+            <div class="costumes-container">
+                <div class="costumes projects">
+                    <img src="./icons/arrow_right.png" alt="arrowIcon"> Projects
+                    <span class="add-category"><a data-toggle="modal" href="#myModal">+</a></span>
+                    <ul class="projects-list">
+                        <!--<li><img src="./icons/dot_icon.png" alt=""><a href="#">Zappier</a></li>-->
+                    </ul>
+                </div>
+                <div class="costumes labels"><img src="./icons/arrow_right.png" alt="arrowIcon">Labels<span class="add-category"><a href="#">+</a></span>
+                </div>
+                <div class="costumes filter"><img src="./icons/arrow_right.png" alt="arrowIcon">Filters</div>
+            </div>
+<!-- MODAL -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <span>Name:</span>
+                        <input type="text" id="project-name" placeholder="New list name...">
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save-btn">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+<!-- MAIN BOARD PANEL -->
+        <div class="col-sm-7 main-board-panel">
+
+            <div class="pages" id="inbox" style="display: none;">
+                <div class="page-tittle"><h3>Inbox page</h3></div>
+                <div class="page-sub-tittle"><h5>Welcome to your inbox page</h5></div>
+            </div>
+            <div class="pages" id="today" style="display: none;">
+                <div class="page-tittle"><h3>Today page</h3></div>
+                <div class="page-sub-tittle"><h5>Welcome to your today page</h5></div>
+            </div>
+            <div class="pages" id="upcoming" style="display: none;">
+                <div class="page-tittle"><h3>Upcoming page</h3></div>
+                <div class="page-sub-tittle"><h5>Welcome to your Upcoming page</h5></div>
+            </div>
+            <div class="pages project-page" style="display: none;">
+                <!--
+                <div class="project-title">
+                    <span class="p-tittle"><h3> Project Tittle name here</h3></span>
+                    <span class="input-list">
+                        <a class="add-task-plus" href="#">+</a>
+                        <input class="input-field" type="text" name="" id="" placeholder="Create new List..">
+                    </span>
+                </div>
+                --->
+                <!--
+                <div class="project-list">
+                    <div class="list-tittle">
+                        <h5>List Name here</h5>
+                        <span class="task-number"> 2 </span>
+                    </div>
+                    <hr>
+                    <ul class="p-list-name"> 
+                       <li><button type="button" class="btn btn-outline-secondary">done</button> Task name</li>
+                       <hr>
+                       <li><button type="button" class="btn btn-outline-secondary">done</button> Task name</li>
+                       <li></li>
+                    </ul>
+                    <span class="input-task">
+                        <a class="add-task-plus" href="#">+</a>
+                        <input class="input-field" type="text" name="" id="" placeholder="Add task..">
+                    </span>
+                </div>
+            -->
+
+                <div class="project-list-completed">
+                    <span class="ul-list-completed-tittle"><h5>Completed</h5></span>
+                    <ul class="ul-list-completed">
+                        <li>Task name </li>
+                        <li>Task name </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="maintype.js"></script>
+</body>
+</html>

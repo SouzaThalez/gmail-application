@@ -1,0 +1,78 @@
+.project-page {
+  margin-left: 2em;
+  margin-top: 28px;
+}
+.project-page .input-list {
+  margin-left: 1em;
+}
+.project-page .input-list .input-field {
+  border: none;
+  margin-left: 10px;
+}
+.project-page .input-list .add-task-plus {
+  font-size: 20px;
+  color: #c95549;
+}
+.project-page .project-list {
+  margin-top: 3em;
+}
+.project-page .project-list .list-tittle {
+  display: inline-flex;
+}
+.project-page .project-list .list-tittle .task-number {
+  position: relative;
+  margin-left: 10px;
+  font-size: 15px;
+  top: 3px;
+}
+.project-page .project-list .btn-outline-secondary {
+  border-radius: 1em;
+  font-size: 10px;
+}
+.project-page .project-list .input-task {
+  margin-left: 1em;
+}
+.project-page .project-list .input-task .input-field {
+  border: none;
+  margin-left: 10px;
+}
+.project-page .project-list .input-task .add-task-plus {
+  font-size: 20px;
+  color: #c95549;
+}
+.project-page .project-list-completed {
+  margin-top: 3em;
+}
+.project-page .project-list-completed .ul-list-completed {
+  margin-left: 3em;
+}
+.project-page .project-list-completed .ul-list-completed li {
+  text-decoration: line-through;
+}
+
+.pages .p-tittle {
+  position: absolute;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+.pages .create-list-input {
+  margin-left: 1em;
+}
+.pages .create-list-input .list-input {
+  border: none;
+  margin-left: 1em;
+}
+.pages .list-tittle {
+  position: absolute;
+  margin-top: 11em;
+  margin-left: 2em;
+}
+.pages .input-task {
+  margin-left: 1em;
+}
+.pages .input-task .input-field {
+  border: none;
+  margin-left: 1em;
+}
+
+/*# sourceMappingURL=boardPanel.css.map */

@@ -1,0 +1,83 @@
+@import './variables.scss';
+.project-page{
+    margin-left: 2em;
+    margin-top: 28px;
+        
+    .input-list{
+         margin-left: 1em;
+         
+        .input-field{
+            border: none;
+            margin-left: 10px;
+        }
+        .add-task-plus{
+            font-size: 20px;
+            color: $navbarBackgroundColor
+        }
+    }
+    .project-list{
+        margin-top: 3em;
+        .list-tittle{
+            
+            display: inline-flex;
+           .task-number{
+            position: relative;
+            margin-left: 10px;
+            font-size: 15px;
+            top: 3px;
+           }
+        }
+        .btn-outline-secondary{
+            border-radius: 1em;
+            font-size: 10px;
+        }
+        .input-task{
+            margin-left: 1em;
+           .input-field{
+               border: none;
+               margin-left: 10px;
+           }
+           .add-task-plus{
+               font-size: 20px;
+               color: $navbarBackgroundColor
+           }
+       }
+    }
+    .project-list-completed{
+        margin-top: 3em;
+        .ul-list-completed{
+            margin-left: 3em;
+            li{
+                text-decoration: line-through;
+            }
+        }
+    }
+
+}
+
+.pages{
+    .p-tittle{
+        position: absolute;
+        margin-top: 2em;
+        margin-left: 2em;
+    }
+    .create-list-input{
+        margin-left: 1em;
+        .list-input{
+            border: none;
+            margin-left: 1em;
+        }
+    }
+    .list-tittle{
+        position: absolute;
+        margin-top: 11em;
+        margin-left: 2em;
+    }
+    .input-task{
+        margin-left: 1em;
+        .input-field{
+            border: none;
+            margin-left: 1em;
+        }
+    }
+}
