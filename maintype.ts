@@ -4,7 +4,24 @@ let pages = document.querySelectorAll('.main-board-panel .pages');
 const newProjectInput = document.querySelector('.modal-body input') as HTMLInputElement;
 const ulProjectList = document.querySelector('.projects-list') as HTMLUListElement;
 let mainBoardPanel = document.querySelector('.main-board-panel') as HTMLDivElement;
-console.log(mainBoardPanel);
+
+class Project{
+
+    name: string;
+    code: number;
+    list: List;
+
+    constructor () {
+        this.list = new List();
+    }
+
+}
+class List{
+    name: string;
+    items: Array<string>;
+}
+
+
 let projectsV: Project[]= [];
 
 
@@ -42,8 +59,6 @@ function callPages(event: any){
             element.setAttribute('style','display:none');
         }
     });
-
-    console.log(menuLinks);
 }
 function createProjects(usertxt: string){
 
@@ -52,7 +67,7 @@ function createProjects(usertxt: string){
     model.name = usertxt;
     model.code = projectsV.length +1 ;
     
-    //Creating de side PANEL projects
+    //Creating the side PANEL projects
     const liTag = document.createElement('li');
     liTag.setAttribute('page-code',model.code.toString());
     const imgTag = document.createElement('img');
@@ -69,9 +84,6 @@ function createProjects(usertxt: string){
 
     console.log(projectsV);
 
-
-
-
     liTag.addEventListener('click',()=>{
         // remove new page before showing!
         let mainPage = document.getElementById('main-page');
@@ -81,175 +93,83 @@ function createProjects(usertxt: string){
         createPage(model);
     });
 
-
-
-    
-
     ulProjectList.append(liTag);
 }
 
 function createPage(project: Project){
 
 //Project Tittle
-    let pageDiv = document.createElement('div');
-    pageDiv.className = 'pages';
-    pageDiv.id = 'main-page';
+    let mainPageDiv = document.createElement('div');
+    mainPageDiv.className = 'pages';
+    mainPageDiv.id = 'main-page';
     let pageSpanTittle =  document.createElement('span');
     pageSpanTittle.className = 'p-tittle';
     let pageh3Tag = document.createElement('h3');
     pageh3Tag.innerHTML = project.name;
     pageSpanTittle.append(pageh3Tag);
+    mainPageDiv.append(pageSpanTittle);
     
 //Project Input list
-    let pageSpanInput = document.createElement('span');
-    pageSpanInput.className = 'create-list-input';
-    let atag = document.createElement('a');
-    atag.className = "add-task-plus";
-    atag.href = '#';
-    atag.innerHTML = '+';
-    let pageInput = document.createElement('input') as HTMLInputElement;
-    pageInput.className = 'list-input';
-    pageInput.setAttribute('type','text');
-    pageInput.setAttribute('placeholder','Create new List..');
+    let spanInputList = document.createElement('span');
+    spanInputList.className = 'input-list';
+    let addListPlusTag = document.createElement('a');
+    addListPlusTag.className = "add-task-plus";
+    addListPlusTag.href = '#';
+    addListPlusTag.innerHTML = '+';
+    spanInputList.append(addListPlusTag);
+    let inputFieldListTag = document.createElement('input') as HTMLInputElement;
+    inputFieldListTag.className = 'input-field-list';
+    inputFieldListTag.setAttribute('type','text');
+    inputFieldListTag.setAttribute('placeholder','Create new List..');
+    spanInputList.append(inputFieldListTag);
+    mainPageDiv.append(spanInputList);
+    //mainBoardPanel.append(mainPageDiv);
 
-    atag.onclick = ()=>{
-
-        project.list.name =  pageInput.value;
-        pageDiv.remove();
+    addListPlusTag.onclick = ()=>{
+        
+        project.list.name =  inputFieldListTag.value;
+        mainPageDiv.remove();
         createPage(project);
-    };
-        // When user inputs the name of the list
-        if(project.list.name){
-          const pListDiv = document.createElement('div');
-           pListDiv.className = 'project-list';
+
+        const projectListDiv = document.createElement('div');
+        projectListDiv.className = 'project-list';
+        const listTittleDiv = document.createElement('div');
+        listTittleDiv.className = 'list-tittle';
+        const h5ListTag = document.createElement('h5');
+        h5ListTag.innerHTML = project.list.name;
+        //const spanTaskNumberTag = document.createElement('span');
+        //spanTaskNumberTag.className = 'task-number';
+        //spanTaskNumberTag.innerHTML = 'number of tasks here..';
+        listTittleDiv.append(h5ListTag);
+        //listTittleDiv.append(spanTaskNumberTag);
+        projectListDiv.append(listTittleDiv);
+    //List Input task
+        let spanInputTask = document.createElement('span');
+        spanInputTask.className = 'input-task';
+        let addTaskPlusTag = document.createElement('a');
+        addTaskPlusTag.className = "add-task-plus";
+        addTaskPlusTag.href = '#';
+        addTaskPlusTag.innerHTML = '+';
+        let inputFieldTaskTag = document.createElement('input') as HTMLInputElement;
+        inputFieldTaskTag.className = 'input-field-task';
+        inputFieldTaskTag.setAttribute('type','text');
+        inputFieldTaskTag.setAttribute('placeholder','Add task..');
+        spanInputTask.append(addTaskPlusTag);
+        spanInputTask.append(inputFieldTaskTag);
+        projectListDiv.append(spanInputTask);
+
        
-           const pListTittleDiv = document.createElement('div');
-           pListDiv.className = 'list-tittle';
-
-           const pageh5Tag = document.createElement('h5');
-           pageh5Tag.innerHTML = project.list.name; 
-
-           const spanTaskNumber = document.createElement('span');
-           spanTaskNumber.className = 'task-number';
-           const spanInputTask = document.createElement('span');
-           spanInputTask.className = 'input-task';
-           let addTaskATAG = document.createElement('a');
-           addTaskATAG.className = "add-task-plus";
-           addTaskATAG.href = '#';
-           addTaskATAG.innerHTML = '+';
-
-           addTaskATAG.onclick = ()=>{
-
-            let listItem = inputField.value;
-
-            if(project.list.items == null){
-                project.list.items = [];
-            }
-            project.list.items.push(listItem);
-
-            inputField.value = '';
-            
-            console.log(projectsV);
-
-            pageDiv.remove();
-            createPage(project);
-            
-        }
-
-           let inputField = document.createElement('input');
-           inputField.className = 'input-field';
-           inputField.type= 'text';
-           inputField.placeholder = 'add task..';
-           spanInputTask.append(addTaskATAG);
-           spanInputTask.append(inputField);
-           pListTittleDiv.append(pageh5Tag);
-           pListTittleDiv.append(spanTaskNumber);
-           pListDiv.append(pListTittleDiv);
-           pListDiv.append(spanInputTask);
-
-           const ulListTag = document.createElement('ul');
-           ulListTag.className = 'project-list';
-           pListDiv.append(ulListTag);
-           pageDiv.append(pListDiv);
-           console.log(project);
-        }
-          
-           
-        if(project.list.items != null){
-            
-            project.list.items.forEach(element => {
-                const pListDiv = document.querySelector('.project-list') as HTMLElement;
-                const ulListTag = document.createElement('ul');
-                ulListTag.className = 'project-list-items';
-                const liTag = document.createElement('li');
-                liTag.innerHTML = element;
-                const btnTag = document.createElement('button');
-                btnTag.className = 'btn btn-outline-secondary';
-                btnTag.innerHTML = 'done';
-                liTag.append(btnTag);
-                ulListTag.append(liTag);
-                pListDiv.appendChild(ulListTag);
-                
-            });
-        }
- 
-
-    pageSpanInput.append(atag);
-    pageSpanInput.append(pageInput);
-    pageSpanTittle.append(pageSpanInput);
-    pageDiv.append(pageSpanTittle);
-    
-    mainBoardPanel.append(pageDiv);
+        let mainDiv = document.querySelector('#main-page');
+        mainDiv.append(projectListDiv);
+        //mainBoardPanel.append(mainPageDiv);
 
 
-//Project List
-    /*
-    const pListDiv = document.createElement('div');
-    pListDiv.className = 'project-list';
 
-    const pListTittleDiv = document.createElement('div');
-    pListDiv.className = 'list-tittle';
-    const pageh5Tag = document.createElement('h5');
-    pageh5Tag.innerHTML = 'list name here'; 
-    const spanTaskNumber = document.createElement('span');
-    spanTaskNumber.className = 'task-number';
-    spanTaskNumber.innerHTML = '2';
-    pListTittleDiv.append(pageh5Tag);
-    pListTittleDiv.append(spanTaskNumber);
-    const hrTag = document.createElement('hr');
-    pListDiv.append(pListTittleDiv);
-    pListDiv.append(hrTag);
+    };
 
-    const ulListTag = document.createElement('ul');
-    ulListTag.className = 'p-list-name';
-    const liTag = document.createElement('li');
-    liTag.innerHTML = 'Task name';
-    const btnTag = document.createElement('button');
-    btnTag.className = 'btn btn-outline-secondary';
-    btnTag.innerHTML = 'done';
-    liTag.append(btnTag);
-    ulListTag.append(liTag);
-    ulListTag.append(hrTag);
-    pListDiv.append(ulListTag);
-    pageDiv.append(pListDiv);
-    */
-
+    mainBoardPanel.append(mainPageDiv);
 
 
 }
 
-class Project{
-    name: string;
-    code: number;
-    list: List;
-
-    constructor () {
-        this.list = new List();
-    }
-
-}
-class List{
-    name: string;
-    items: Array<string>;
-}
 
