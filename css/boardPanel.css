@@ -64,19 +64,24 @@
   border: none;
   margin-left: 1em;
 }
-.pages .list-tittle {
+.pages .project-list .list-tittle {
   position: absolute;
   margin-top: 11em;
   margin-left: 2em;
 }
-.pages .input-task {
+.pages .project-list .input-task {
   position: absolute;
   margin-left: 3em;
   margin-top: 13em;
 }
-.pages .input-task .input-field-task {
+.pages .project-list .input-task .input-field-task {
   border: none;
   margin-left: 1em;
+}
+.pages .project-list #p-list {
+  position: absolute;
+  margin-top: 17em;
+  margin-left: 4em;
 }
 
 /*# sourceMappingURL=boardPanel.css.map */

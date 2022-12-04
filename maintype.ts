@@ -5,6 +5,8 @@ const newProjectInput = document.querySelector('.modal-body input') as HTMLInput
 const ulProjectList = document.querySelector('.projects-list') as HTMLUListElement;
 let mainBoardPanel = document.querySelector('.main-board-panel') as HTMLDivElement;
 
+
+
 class Project{
 
     name: string;
@@ -162,14 +164,75 @@ function createPage(project: Project){
         let mainDiv = document.querySelector('#main-page');
         mainDiv.append(projectListDiv);
         //mainBoardPanel.append(mainPageDiv);
-
-
+        
+        createProjectList(addTaskPlusTag, project);
 
     };
 
     mainBoardPanel.append(mainPageDiv);
 
+  
+
 
 }
 
 
+function createProjectList(addTaskIcon: any, project: Project){
+
+    const projectLsitDiv = document.querySelector('.project-list');
+    let plusIconTag = addTaskIcon;
+
+    if(projectLsitDiv == null){
+        return null
+    }
+// THIS else CODE WILL BE EXECUTED ONLY IF
+// THE USER CLICK ADD TASK ICON 
+    else{
+
+        plusIconTag.onclick = ()=>{
+           
+            const inputTask = document.querySelector('.input-field-task') as HTMLInputElement;
+            const listItem = inputTask.value;
+            //CHECK IF THE ARRAY IS CREATED BEFORE PASSING A VALUE
+            // IF IS CRATED YOU WILL ADD TO IT !
+            if(project.list.items == null){
+                project.list.items = [];
+            }
+            project.list.items.push(listItem);
+            inputTask.value = '';
+
+//CREATE PROJECT LIST ELEMENTS
+            let pListUL = document.querySelector('#p-list') as HTMLUListElement;
+
+            if(!pListUL){
+                pListUL = document.createElement('ul');
+                pListUL.id = 'p-list';
+                projectLsitDiv.append(pListUL);
+            }
+
+            pListUL.innerHTML = '';
+            
+            for (let index = 0; index < project.list.items.length; index++) {
+
+                    const element = project.list.items[index];
+                    const itemsLi =  document.createElement('li');
+                    itemsLi.innerHTML = element;
+                    const btnBootstrap =  document.createElement('button');
+                    btnBootstrap.type = 'button';
+                    btnBootstrap.className = 'btn btn-outline-secondary';
+                    btnBootstrap.innerHTML = 'Done';
+                    itemsLi.append(btnBootstrap);
+                    pListUL.append(itemsLi);
+                    const hrTag = document.createElement('hr');
+                    pListUL.append(hrTag);
+                
+
+                console.log('Project Object: ', project);
+                
+            }
+            
+            return console.log('this is my projectList Div' , projectLsitDiv);
+        }
+    
+    }
+}

@@ -68,18 +68,26 @@
       margin-left: 1em;
     }
   }
-  .list-tittle {
-    position: absolute;
-    margin-top: 11em;
-    margin-left: 2em;
-  }
-  .input-task {
-    position: absolute;
-    margin-left: 3em;
-    margin-top: 13em;
-    .input-field-task {
-      border: none;
-      margin-left: 1em;
+  .project-list{
+    .list-tittle {
+      position: absolute;
+      margin-top: 11em;
+      margin-left: 2em;
+    }
+    .input-task {
+      position: absolute;
+      margin-left: 3em;
+      margin-top: 13em;
+      .input-field-task {
+        border: none;
+        margin-left: 1em;
+      }
+    }
+    #p-list{
+      position: absolute;
+      margin-top: 17em;
+      margin-left: 4em;
     }
   }
+ 
 }

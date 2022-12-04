@@ -132,6 +132,52 @@ function createPage(project) {
         var mainDiv = document.querySelector('#main-page');
         mainDiv.append(projectListDiv);
         //mainBoardPanel.append(mainPageDiv);
+        createProjectList(addTaskPlusTag, project);
     };
     mainBoardPanel.append(mainPageDiv);
+}
+function createProjectList(addTaskIcon, project) {
+    var projectLsitDiv = document.querySelector('.project-list');
+    var plusIconTag = addTaskIcon;
+    if (projectLsitDiv == null) {
+        return null;
+    }
+    // THIS else CODE WILL BE EXECUTED ONLY IF
+    // THE USER CLICK ADD TASK ICON 
+    else {
+        plusIconTag.onclick = function () {
+            var inputTask = document.querySelector('.input-field-task');
+            var listItem = inputTask.value;
+            //CHECK IF THE ARRAY IS CREATED BEFORE PASSING A VALUE
+            // IF IS CRATED YOU WILL ADD TO IT !
+            if (project.list.items == null) {
+                project.list.items = [];
+            }
+            project.list.items.push(listItem);
+            inputTask.value = '';
+            //CREATE PROJECT LIST ELEMENTS
+            var pListUL = document.querySelector('#p-list');
+            if (!pListUL) {
+                pListUL = document.createElement('ul');
+                pListUL.id = 'p-list';
+                projectLsitDiv.append(pListUL);
+            }
+            pListUL.innerHTML = '';
+            for (var index = 0; index < project.list.items.length; index++) {
+                var element = project.list.items[index];
+                var itemsLi = document.createElement('li');
+                itemsLi.innerHTML = element;
+                var btnBootstrap = document.createElement('button');
+                btnBootstrap.type = 'button';
+                btnBootstrap.className = 'btn btn-outline-secondary';
+                btnBootstrap.innerHTML = 'Done';
+                itemsLi.append(btnBootstrap);
+                pListUL.append(itemsLi);
+                var hrTag = document.createElement('hr');
+                pListUL.append(hrTag);
+                console.log('Project Object: ', project);
+            }
+            return console.log('this is my projectList Div', projectLsitDiv);
+        };
+    }
 }
