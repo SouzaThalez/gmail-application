@@ -92,6 +92,11 @@
         width: 500px;
         justify-content: space-between;
       }
+      li:hover {
+        cursor: pointer;
+        background-color: rgb(238, 238, 238);
+        border-radius: 5%;
+      }
     }
   }
 }

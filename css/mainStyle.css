@@ -170,6 +170,11 @@
   width: 500px;
   justify-content: space-between;
 }
+.pages .project-list #p-list li:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+  border-radius: 5%;
+}
 
 .navbar {
   height: 55px;
