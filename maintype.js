@@ -62,7 +62,6 @@ function createProjects(usertxt) {
     liTag.append(imgTag);
     liTag.append(alinkTag);
     projectsV.push(model);
-    console.log(projectsV);
     liTag.addEventListener('click', function () {
         // remove new page before showing!
         var mainPage = document.getElementById('main-page');
@@ -70,6 +69,7 @@ function createProjects(usertxt) {
             mainPage.remove();
         }
         createPage(model);
+        listProject(model);
     });
     ulProjectList.append(liTag);
 }
@@ -98,7 +98,6 @@ function createPage(project) {
     inputFieldListTag.setAttribute('placeholder', 'Create new List..');
     spanInputList.append(inputFieldListTag);
     mainPageDiv.append(spanInputList);
-    //mainBoardPanel.append(mainPageDiv);
     addListPlusTag.onclick = function () {
         project.list.name = inputFieldListTag.value;
         mainPageDiv.remove();
@@ -131,7 +130,6 @@ function createPage(project) {
         projectListDiv.append(spanInputTask);
         var mainDiv = document.querySelector('#main-page');
         mainDiv.append(projectListDiv);
-        //mainBoardPanel.append(mainPageDiv);
         createProjectList(addTaskPlusTag, project);
     };
     mainBoardPanel.append(mainPageDiv);
@@ -166,7 +164,9 @@ function createProjectList(addTaskIcon, project) {
             for (var index = 0; index < project.list.items.length; index++) {
                 var element = project.list.items[index];
                 var itemsLi = document.createElement('li');
-                itemsLi.innerHTML = element;
+                var spanText = document.createElement('span');
+                spanText.innerHTML = element;
+                itemsLi.append(spanText);
                 var btnBootstrap = document.createElement('button');
                 btnBootstrap.type = 'button';
                 btnBootstrap.className = 'btn btn-outline-secondary';
@@ -175,9 +175,96 @@ function createProjectList(addTaskIcon, project) {
                 pListUL.append(itemsLi);
                 var hrTag = document.createElement('hr');
                 pListUL.append(hrTag);
-                console.log('Project Object: ', project);
             }
-            return console.log('this is my projectList Div', projectLsitDiv);
+            //return console.log('this is my projectList Div' , projectLsitDiv);
         };
     }
+}
+function listProject(project) {
+    //The first time this function  is called its
+    // its going to hit the return and end the whole function!
+    if (project.list.name == null) {
+        return;
+    }
+    //Create Project list
+    var mainDiv = document.querySelector('#main-page');
+    var projectListDiv = document.createElement('div');
+    projectListDiv.className = 'project-list';
+    var listTittleDiv = document.createElement('div');
+    listTittleDiv.className = 'list-tittle';
+    var h5ListTag = document.createElement('h5');
+    h5ListTag.innerHTML = project.list.name;
+    listTittleDiv.append(h5ListTag);
+    projectListDiv.append(listTittleDiv);
+    //List Input task
+    var spanInputTask = document.createElement('span');
+    spanInputTask.className = 'input-task';
+    var addTaskPlusTag = document.createElement('a');
+    addTaskPlusTag.className = "add-task-plus";
+    addTaskPlusTag.href = '#';
+    addTaskPlusTag.innerHTML = '+';
+    var inputFieldTaskTag = document.createElement('input');
+    inputFieldTaskTag.className = 'input-field-task';
+    inputFieldTaskTag.setAttribute('type', 'text');
+    inputFieldTaskTag.setAttribute('placeholder', 'Add task..');
+    addTaskPlusTag.onclick = function () {
+        var listInput = inputFieldTaskTag.value;
+        if (!project.list.items) {
+            project.list.items = [];
+            project.list.items.push(listInput);
+        }
+        else {
+            pListUL.innerHTML = '';
+            project.list.items.push(listInput);
+        }
+        for (var index = 0; index < project.list.items.length; index++) {
+            var element = project.list.items[index];
+            var itemsLi = document.createElement('li');
+            var spanText = document.createElement('span');
+            spanText.innerHTML = element;
+            itemsLi.append(spanText);
+            var btnBootstrap = document.createElement('button');
+            btnBootstrap.type = 'button';
+            btnBootstrap.className = 'btn btn-outline-secondary';
+            btnBootstrap.innerHTML = 'Done';
+            itemsLi.append(btnBootstrap);
+            pListUL.append(itemsLi);
+            var hrTag = document.createElement('hr');
+            pListUL.append(hrTag);
+        }
+        mainDiv.append(projectListDiv);
+        inputFieldTaskTag.value = '';
+        console.log('MEU VETOR DE OBJECTO: ', projectsV);
+        return;
+    };
+    spanInputTask.append(addTaskPlusTag);
+    spanInputTask.append(inputFieldTaskTag);
+    projectListDiv.append(spanInputTask);
+    var pListUL = document.querySelector('#p-list');
+    if (!pListUL) {
+        pListUL = document.createElement('ul');
+        pListUL.id = 'p-list';
+        projectListDiv.append(pListUL);
+    }
+    if (project.list.items == null) {
+        mainDiv.append(projectListDiv);
+        return;
+    }
+    for (var index = 0; index < project.list.items.length; index++) {
+        var element = project.list.items[index];
+        var itemsLi = document.createElement('li');
+        var spanText = document.createElement('span');
+        spanText.innerHTML = element;
+        itemsLi.append(spanText);
+        var btnBootstrap = document.createElement('button');
+        btnBootstrap.type = 'button';
+        btnBootstrap.className = 'btn btn-outline-secondary';
+        btnBootstrap.innerHTML = 'Done';
+        itemsLi.append(btnBootstrap);
+        pListUL.append(itemsLi);
+        var hrTag = document.createElement('hr');
+        pListUL.append(hrTag);
+    }
+    console.log(projectsV);
+    mainDiv.append(projectListDiv);
 }

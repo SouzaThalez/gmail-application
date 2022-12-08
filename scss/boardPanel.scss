@@ -68,7 +68,7 @@
       margin-left: 1em;
     }
   }
-  .project-list{
+  .project-list {
     .list-tittle {
       position: absolute;
       margin-top: 11em;
@@ -83,11 +83,15 @@
         margin-left: 1em;
       }
     }
-    #p-list{
+    #p-list {
       position: absolute;
       margin-top: 17em;
       margin-left: 4em;
+      li {
+        display: flex;
+        width: 500px;
+        justify-content: space-between;
+      }
     }
   }
- 
 }

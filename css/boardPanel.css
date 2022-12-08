@@ -83,5 +83,10 @@
   margin-top: 17em;
   margin-left: 4em;
 }
+.pages .project-list #p-list li {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
 
 /*# sourceMappingURL=boardPanel.css.map */
