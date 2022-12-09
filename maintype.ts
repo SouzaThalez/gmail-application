@@ -6,7 +6,7 @@ const ulProjectList = document.querySelector('.projects-list') as HTMLUListEleme
 let mainBoardPanel = document.querySelector('.main-board-panel') as HTMLDivElement;
 
 
-//
+
 class Project{
 
     name: string;
