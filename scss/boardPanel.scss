@@ -1,59 +1,24 @@
 @import "./variables.scss";
-.project-page {
-  margin-left: 2em;
-  margin-top: 28px;
-
-  .input-list {
-    margin-left: 1em;
-
-    .input-field {
-      border: none;
-      margin-left: 10px;
-    }
-    .add-task-plus {
-      font-size: 20px;
-      color: $navbarBackgroundColor;
-    }
-  }
-  .project-list {
-    margin-top: 3em;
-    .list-tittle {
-      display: inline-flex;
-      .task-number {
-        position: relative;
-        margin-left: 10px;
-        font-size: 15px;
-        top: 3px;
-      }
-    }
-    .btn-outline-secondary {
-      border-radius: 1em;
-      font-size: 10px;
-    }
-    .input-task {
-      margin-left: 1em;
-      .input-field {
-        border: none;
-        margin-left: 10px;
-      }
-      .add-task-plus {
-        font-size: 20px;
-        color: $navbarBackgroundColor;
-      }
-    }
-  }
-  .project-list-completed {
-    margin-top: 3em;
-    .ul-list-completed {
-      margin-left: 3em;
-      li {
-        text-decoration: line-through;
-      }
-    }
-  }
-}
-
+@import "./subBoardPLists";
 .pages {
+  border: 1px dotted black;
+  border-radius: 10px;
+  margin-top: 2em;
+  .page-container {
+    margin-left: 2em;
+    .page-tittle {
+      display: flex;
+      justify-content: space-between;
+      .custom-select {
+        margin-top: 10px;
+        width: 21%;
+      }
+    }
+    .page-body {
+      margin-top: 32px;
+      border-top: 1px solid grey;
+    }
+  }
   .p-tittle {
     position: absolute;
     margin-top: 2em;

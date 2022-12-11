@@ -1,0 +1,28 @@
+@import "./variables.scss";
+.inbox-list {
+  margin-top: 1em;
+  img {
+    margin-top: 15px;
+    width: 32px;
+    height: 32px;
+  }
+  .media-body {
+    font-size: 80%;
+    margin-top: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      .list-date {
+        color: grey;
+      }
+    }
+    .list-text {
+      margin-left: 1em;
+    }
+  }
+  li:hover {
+    background-color: $hoverItemsColor;
+    cursor: pointer;
+  }
+}

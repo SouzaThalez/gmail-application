@@ -1,72 +1,73 @@
+@import "./variables.scss";
 .side-panel {
-    //border: 1px dotted black;
-    background-color: $sidePanelBackgroundColor;
-    height: 770px;
-    margin-left: 2em;
-    margin-top: 1px;
-    .main-menu-list {
-      margin-top: 24px;
-      .list-item {
-        padding: 10px;
+  //border: 1px dotted black;
+  background-color: $sidePanelBackgroundColor;
+  height: 770px;
+  margin-left: 2em;
+  margin-top: 1px;
+  .main-menu-list {
+    margin-top: 24px;
+    .list-item {
+      padding: 10px;
+      a {
+        margin-left: 10px;
+        color: grey;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .note-counts {
+        float: right;
+        margin-right: 10px;
+      }
+    }
+    .list-item:hover {
+      cursor: pointer;
+      background-color: $hoverItemsColor;
+      border-radius: 8%;
+      border-top-right-radius: 280px;
+      border-bottom-right-radius: 200px;
+    }
+  }
+  .costumes-container {
+    margin-left: 0.1em;
+    .costumes {
+      padding: 10px;
+      .add-category {
+        font-size: 30px;
+        margin-left: 10px;
+        position: relative;
+        top: 4px;
         a {
-          margin-left: 10px;
-          color: grey;
-        }
-        a:hover {
-          text-decoration: none;
-        }
-        .note-counts {
-          float: right;
-          margin-right: 10px;
+          color: $navbarBackgroundColor;
         }
       }
-      .list-item:hover {
+    }
+    .projects-list {
+      margin-left: -0.6em;
+      margin-top: 8px;
+      li {
+        padding: 10px;
+      }
+      li:hover {
         cursor: pointer;
-        background-color: rgb(209, 209, 209);
+        background-color: $hoverItemsColor;
         border-radius: 8%;
-        border-top-right-radius: 280px;
-        border-bottom-right-radius: 200px;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
       }
-    }
-    .costumes-container {
-      margin-left: 0.1em;
-      .costumes {
-        padding: 10px;
-        .add-category{
-          font-size: 30px;
-          margin-left: 10px;
-          position: relative;
-          top: 4px;
-          a{
-            color: $navbarBackgroundColor;
-          }
-        }
+      a {
+        margin-left: 10px;
+        color: grey;
       }
-      .projects-list {
-        margin-left: -0.6em;
-        margin-top: 8px;
-        li {
-          padding: 10px;
-        }
-        li:hover {
-          cursor: pointer;
-          background-color: rgb(209, 209, 209);
-          border-radius: 8%;
-          border-top-right-radius: 300px;
-          border-bottom-right-radius: 200px;
-        }
-        a {
-          margin-left: 10px;
-          color: grey;
-        }
-        a:hover {
-          text-decoration: none;
-        }
-      }
-    }
-    .modal-body{
-      input{
-        border: none;
+      a:hover {
+        text-decoration: none;
       }
     }
   }
+  .modal-body {
+    input {
+      border: none;
+    }
+  }
+}

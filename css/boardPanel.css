@@ -1,55 +1,51 @@
-.project-page {
-  margin-left: 2em;
-  margin-top: 28px;
+.inbox-list {
+  margin-top: 1em;
 }
-.project-page .input-list {
+.inbox-list img {
+  margin-top: 15px;
+  width: 32px;
+  height: 32px;
+}
+.inbox-list .media-body {
+  font-size: 80%;
+  margin-top: 5px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.inbox-list .media-body .list-header {
+  display: flex;
+  justify-content: space-between;
+}
+.inbox-list .media-body .list-header .list-date {
+  color: grey;
+}
+.inbox-list .media-body .list-text {
   margin-left: 1em;
 }
-.project-page .input-list .input-field {
-  border: none;
-  margin-left: 10px;
-}
-.project-page .input-list .add-task-plus {
-  font-size: 20px;
-  color: #c95549;
-}
-.project-page .project-list {
-  margin-top: 3em;
-}
-.project-page .project-list .list-tittle {
-  display: inline-flex;
-}
-.project-page .project-list .list-tittle .task-number {
-  position: relative;
-  margin-left: 10px;
-  font-size: 15px;
-  top: 3px;
-}
-.project-page .project-list .btn-outline-secondary {
-  border-radius: 1em;
-  font-size: 10px;
-}
-.project-page .project-list .input-task {
-  margin-left: 1em;
-}
-.project-page .project-list .input-task .input-field {
-  border: none;
-  margin-left: 10px;
-}
-.project-page .project-list .input-task .add-task-plus {
-  font-size: 20px;
-  color: #c95549;
-}
-.project-page .project-list-completed {
-  margin-top: 3em;
-}
-.project-page .project-list-completed .ul-list-completed {
-  margin-left: 3em;
-}
-.project-page .project-list-completed .ul-list-completed li {
-  text-decoration: line-through;
+.inbox-list li:hover {
+  background-color: #d1d1d1;
+  cursor: pointer;
 }
 
+.pages {
+  border: 1px dotted black;
+  border-radius: 10px;
+  margin-top: 2em;
+}
+.pages .page-container {
+  margin-left: 2em;
+}
+.pages .page-container .page-tittle {
+  display: flex;
+  justify-content: space-between;
+}
+.pages .page-container .page-tittle .custom-select {
+  margin-top: 10px;
+  width: 21%;
+}
+.pages .page-container .page-body {
+  margin-top: 32px;
+  border-top: 1px solid grey;
+}
 .pages .p-tittle {
   position: absolute;
   margin-top: 2em;

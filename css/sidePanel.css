@@ -1,17 +1,71 @@
-/* Error: Undefined variable.
- *   ,
- * 3 |     background-color: $sidePanelBackgroundColor;
- *   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   scss\sidePanel.scss 3:23  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a   \2577 \a 3 \2502      background-color: $sidePanelBackgroundColor;\d\a   \2502                        ^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   scss\\sidePanel.scss 3:23  root stylesheet";
+.side-panel {
+  background-color: #fafafa;
+  height: 770px;
+  margin-left: 2em;
+  margin-top: 1px;
 }
+.side-panel .main-menu-list {
+  margin-top: 24px;
+}
+.side-panel .main-menu-list .list-item {
+  padding: 10px;
+}
+.side-panel .main-menu-list .list-item a {
+  margin-left: 10px;
+  color: grey;
+}
+.side-panel .main-menu-list .list-item a:hover {
+  text-decoration: none;
+}
+.side-panel .main-menu-list .list-item .note-counts {
+  float: right;
+  margin-right: 10px;
+}
+.side-panel .main-menu-list .list-item:hover {
+  cursor: pointer;
+  background-color: #d1d1d1;
+  border-radius: 8%;
+  border-top-right-radius: 280px;
+  border-bottom-right-radius: 200px;
+}
+.side-panel .costumes-container {
+  margin-left: 0.1em;
+}
+.side-panel .costumes-container .costumes {
+  padding: 10px;
+}
+.side-panel .costumes-container .costumes .add-category {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+}
+.side-panel .costumes-container .costumes .add-category a {
+  color: #c95549;
+}
+.side-panel .costumes-container .projects-list {
+  margin-left: -0.6em;
+  margin-top: 8px;
+}
+.side-panel .costumes-container .projects-list li {
+  padding: 10px;
+}
+.side-panel .costumes-container .projects-list li:hover {
+  cursor: pointer;
+  background-color: #d1d1d1;
+  border-radius: 8%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.side-panel .costumes-container .projects-list a {
+  margin-left: 10px;
+  color: grey;
+}
+.side-panel .costumes-container .projects-list a:hover {
+  text-decoration: none;
+}
+.side-panel .modal-body input {
+  border: none;
+}
+
+/*# sourceMappingURL=sidePanel.css.map */

@@ -42,41 +42,96 @@
                 <div class="costumes filter"><img src="./icons/arrow_right.png" alt="arrowIcon">Filters</div>
             </div>
 <!-- MODAL -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <span>Name:</span>
-                        <input type="text" id="project-name" placeholder="New list name...">
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary save-btn">Save</button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <span>Name:</span>
+                            <input type="text" id="project-name" placeholder="New list name...">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save-btn">Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
 <!-- MAIN BOARD PANEL -->
         <div class="col-sm-7 main-board-panel">
 
-            <div class="pages" id="inbox" style="display: none;">
-                <div class="page-tittle"><h3>Inbox page</h3></div>
-                <div class="page-sub-tittle"><h5>Welcome to your inbox page</h5></div>
+            <div class="pages" id="inbox" style="display: block;">
+                <div class="page-container">
+                    <div class="page-tittle">
+                        <h3>Inbox page</h3>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>Filter...</option>
+                            <option value="1">Project Name</option>
+                            <option value="2">Project Date</option>
+                            <option value="3">Other</option>
+                        </select>
+                    </div>
+                    <div class="page-sub-tittle">
+                        <h6>Your general Activities</h6></div>
+                    <div class="page-body">
+                        <ul class="inbox-list">
+                            <li>
+                                <div class="media">
+                                    <img class="mr-2 rounded" src="..." alt="img">
+                                    <div class="media-body">
+                                        <div class="list-header">
+                                            <strong class="d-block text-gray-dark">@projectname</strong>
+                                            <span class="list-date">30-22-2022</span>
+                                        </div>
+                                      <p class="list-text">Cras sit amet nibh libero, in gravida nulla.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <img class="mr-2 rounded" src="..." alt="img">
+                                    <div class="media-body">
+                                        <div class="list-header">
+                                            <strong class="d-block text-gray-dark">@projectname</strong>
+                                            <span class="list-date">30-22-2022</span>
+                                        </div>
+                                      <p class="list-text">Cras sit amet nibh libero, in gravida nulla.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <img class="mr-2 rounded" src="..." alt="img">
+                                    <div class="media-body">
+                                        <div class="list-header">
+                                            <strong class="d-block text-gray-dark">@projectname</strong>
+                                            <span class="list-date">30-22-2022</span>
+                                        </div>
+                                      <p class="list-text">Cras sit amet nibh libero, in gravida nulla.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="pages" id="today" style="display: none;">
-                <div class="page-tittle"><h3>Today page</h3></div>
-                <div class="page-sub-tittle"><h5>Welcome to your today page</h5></div>
+                <div class="page-container">
+                    <div class="page-tittle"><h3>Today page</h3></div>
+                    <div class="page-sub-tittle"><h6>Your today's Activities</h6></div>
+                </div>
             </div>
             <div class="pages" id="upcoming" style="display: none;">
-                <div class="page-tittle"><h3>Upcoming page</h3></div>
-                <div class="page-sub-tittle"><h5>Welcome to your Upcoming page</h5></div>
+                <div class="page-container">
+                    <div class="page-tittle"><h3>Upcoming page</h3></div>
+                    <div class="page-sub-tittle"><h6>Your upcoming Activities</h6></div>
+                </div>
             </div>
             <div class="pages" style="display: none;">
                 <!--
@@ -116,7 +171,7 @@
                     </span>
                 </div>
             -->
-
+            <!--
                 <div class="project-list-completed">
                     <span class="ul-list-completed-tittle"><h5>Completed</h5></span>
                     <ul class="ul-list-completed">
@@ -124,6 +179,7 @@
                         <li>Task name </li>
                     </ul>
                 </div>
+            -->
             </div>
 
         </div>
