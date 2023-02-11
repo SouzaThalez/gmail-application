@@ -1,8 +1,11 @@
 //GLBOAL SELECTORS
 let mainList = document.querySelectorAll('.main-menu-list .list-item');
 let pages = document.querySelectorAll('.main-board-panel .pages');
-const newProjectInput = document.querySelector('.modal-body input') as HTMLInputElement;
 const ulProjectList = document.querySelector('.projects-list') as HTMLUListElement;
+const newProjectInput = document.querySelector('.modal-body input') as HTMLInputElement;
+
+
+
 let mainBoardPanel = document.querySelector('.main-board-panel') as HTMLDivElement;
 
 
@@ -24,7 +27,7 @@ class List{
 }
 
 
-let projectsV: Project[]= [];
+let projectsV: any []= [];
 
 
 // BUTTONS
@@ -35,67 +38,125 @@ mainList.forEach(element => {
     element.addEventListener('click',callPages);
 });
 saveBtn.addEventListener('click',saveProjects);
-
+ 
+//projectlistLi.forEach(element => {
+    //element.addEventListener('click',callPages);
+//});
 
 // Functions
 function saveProjects(){
+
+    let modal = new Project();
     //Fazer validação de String
     //Apagar campo depois de apertar save
     //Fechar modal depois de apertar save
-    let usertxt = newProjectInput.value;
+    modal.name = newProjectInput.value;
     newProjectInput.value = '';
     saveBtn.setAttribute('data-dismiss','modal');
-    createProjects(usertxt);
+    
+    createProjects(modal);
 
+    const projectUlElements = ulProjectList.querySelectorAll('li');
+    projectUlElements.forEach(element => {
+        element.onclick = ()=>{
+            createPage(modal);
+            console.log('swswsw',element);
+           //callPages(element);
+        }
+    });
 }
+
+
+
+
+
+
+
+
+
 function callPages(event: any){
+
+    //Second selection of pages 
+    // Since when this function is called, new page div is created
+    let pagess = document.querySelectorAll('.main-board-panel .pages');
     let menuLinks =  event.target.id;
     
-    pages.forEach(element =>{
+
+    pagess.forEach(element =>{
 
         let pagesID = element.id;
 
         if(menuLinks == pagesID){
-            element.setAttribute('style','display:block');
+            switch (menuLinks) {
+                case 'inbox':
+                    inboxPageHeaderCreation();
+                    projectsV.forEach(element => {
+                        let projectName =  element.name;
+                        let projectInfo =  element.list.items;
+                        inboxPageListCreation(element);
+                        //console.log('projectName: ', projectName,'Project list: ', projectInfo);
+                    });
+                    element.setAttribute('style','display:block');
+                    break
+                case 'today':
+                    element.setAttribute('style','display:block');
+                    break
+                case 'upcoming': 
+                   
+                    element.setAttribute('style','display:block');
+                    break 
+                case 'project-page': 
+                    element.setAttribute('style','display:block');
+                    //createProjects(event.innerHTML);
+                    let addTaskPlus = document.querySelector('.project-page .add-task-plus');
+                    let addListPlus = document.querySelector('.project-page .add-list-plus');
+                    console.log('addtask + addlist tgs',addListPlus,addTaskPlus);
+                    break  
+            }
+            
         }else{
             element.setAttribute('style','display:none');
         }
     });
 }
-function createProjects(usertxt: string){
+function createProjects(project: Project){
 
-    //CREATING NEW INSTANCE
-    let model = new Project();
-    model.name = usertxt;
-    model.code = projectsV.length +1 ;
+    project.code = projectsV.length + 1 - 1 ;
+
     
     //Creating the side PANEL projects
     const liTag = document.createElement('li');
-    liTag.setAttribute('page-code',model.code.toString());
+    liTag.setAttribute('page-code',project.code.toString());
+    liTag.setAttribute('id','project-page');
     const imgTag = document.createElement('img');
-    const alinkTag = document.createElement('a');
+    const spanlinkTag = document.createElement('span');
     imgTag.src = './icons/dot_icon.png';
     imgTag.alt = 'icon-logo';
-    alinkTag.href = '#';
-    alinkTag.innerHTML = usertxt;
+    spanlinkTag.innerHTML = project.name;
     liTag.append(imgTag);
-    liTag.append(alinkTag);
+    liTag.append(spanlinkTag);
+    ulProjectList.append(liTag);
 
+    //Storing data!!
+    projectsV.push(project);
 
-    projectsV.push(model);
+    console.log('projectV',projectsV);  
 
+/*
     liTag.addEventListener('click',()=>{
         
         // remove new page before showing!
-        let mainPage = document.getElementById('main-page');
-        if(mainPage != null){
-            mainPage.remove();
+        let projectPage = document.getElementById('project-page');
+
+        if(projectPage != null){ 
+            projectPage.remove();
         }
         createPage(model);
-        listProject(model);
-    });
+        ShowProjectList(model);
 
-    ulProjectList.append(liTag);
+    });
+    */
+    
 }
 
 function createPage(project: Project){
@@ -103,7 +164,7 @@ function createPage(project: Project){
 //Project Tittle
     let mainPageDiv = document.createElement('div');
     mainPageDiv.className = 'pages';
-    mainPageDiv.id = 'main-page';
+    mainPageDiv.id = 'project-page';
     let pageSpanTittle =  document.createElement('span');
     pageSpanTittle.className = 'p-tittle';
     let pageh3Tag = document.createElement('h3');
@@ -115,8 +176,9 @@ function createPage(project: Project){
     let spanInputList = document.createElement('span');
     spanInputList.className = 'input-list';
     let addListPlusTag = document.createElement('a');
-    addListPlusTag.className = "add-task-plus";
-    addListPlusTag.href = '#';
+    addListPlusTag.className = "add-list-plus";
+    //addListPlusTag.href = 'myfunction()';
+    addListPlusTag.setAttribute('onclick','addList()');
     addListPlusTag.innerHTML = '+';
     spanInputList.append(addListPlusTag);
     let inputFieldListTag = document.createElement('input') as HTMLInputElement;
@@ -126,12 +188,17 @@ function createPage(project: Project){
     spanInputList.append(inputFieldListTag);
     mainPageDiv.append(spanInputList);
 
+    mainBoardPanel.append(mainPageDiv);
+    
+/*
     addListPlusTag.onclick = ()=>{
         
         project.list.name =  inputFieldListTag.value;
-        mainPageDiv.remove();
-        createPage(project);
+        inputFieldListTag.value = '';
+        //createPage(project);
+        //mainPageDiv.remove();
 
+    //Project List div    
         const projectListDiv = document.createElement('div');
         projectListDiv.className = 'project-list';
         const listTittleDiv = document.createElement('div');
@@ -144,6 +211,7 @@ function createPage(project: Project){
         listTittleDiv.append(h5ListTag);
         //listTittleDiv.append(spanTaskNumberTag);
         projectListDiv.append(listTittleDiv);
+
     //List Input task
         let spanInputTask = document.createElement('span');
         spanInputTask.className = 'input-task';
@@ -154,60 +222,34 @@ function createPage(project: Project){
         let inputFieldTaskTag = document.createElement('input') as HTMLInputElement;
         inputFieldTaskTag.className = 'input-field-task';
         inputFieldTaskTag.setAttribute('type','text');
-        inputFieldTaskTag.setAttribute('placeholder','Add task..');
+        inputFieldTaskTag.setAttribute('placeholder','Create new task..');
         spanInputTask.append(addTaskPlusTag);
         spanInputTask.append(inputFieldTaskTag);
         projectListDiv.append(spanInputTask);
 
+        mainPageDiv.append(projectListDiv);
        
-        let mainDiv = document.querySelector('#main-page');
-        mainDiv.append(projectListDiv);
-       
-        
-        createProjectList(addTaskPlusTag, project);
-
-    };
-    
-    mainBoardPanel.append(mainPageDiv);
-}
-
-function createProjectList(addTaskIcon: any, project: Project){
-
-    const projectLsitDiv = document.querySelector('.project-list');
-    let plusIconTag = addTaskIcon;
-
-    if(projectLsitDiv == null){
-        return null
-    }
-// THIS else CODE WILL BE EXECUTED ONLY IF
-// THE USER CLICK ADD TASK ICON 
-    else{
-
-        plusIconTag.onclick = ()=>{
-           
-            const inputTask = document.querySelector('.input-field-task') as HTMLInputElement;
-            const listItem = inputTask.value;
-            //CHECK IF THE ARRAY IS CREATED BEFORE PASSING A VALUE
-            // IF IS CRATED YOU WILL ADD TO IT !
+        addTaskPlusTag.onclick = ()=>{
+            let taskInput = inputFieldTaskTag.value;
+            inputFieldTaskTag.value = '';
+            //ProjectlistItems has to be created first
+            //Before assign it a value
             if(project.list.items == null){
                 project.list.items = [];
             }
-            project.list.items.push(listItem);
-            inputTask.value = '';
+            //Store DATA
+            project.list.items.push(taskInput);
 
-//CREATE PROJECT LIST ELEMENTS
-            let pListUL = document.querySelector('#p-list') as HTMLUListElement;
 
-            if(!pListUL){
-                pListUL = document.createElement('ul');
-                pListUL.id = 'p-list';
-                projectLsitDiv.append(pListUL);
-            }
-
-            pListUL.innerHTML = '';
-            
-            for (let index = 0; index < project.list.items.length; index++) {
-
+            let projectListUL = document.querySelector('#p-list') as HTMLUListElement;
+            //Project list will not exist, first time
+            //If project list does not exist, create.
+            if(projectListUL == null){
+                projectListUL = document.createElement('ul');
+                projectListUL.id = 'p-list';
+                projectListDiv.append(projectListUL);
+                for (let index = 0; index < project.list.items.length; index++) {
+       
                     const element = project.list.items[index];
                     const itemsLi =  document.createElement('li');
                     const spanText = document.createElement('span');
@@ -218,115 +260,269 @@ function createProjectList(addTaskIcon: any, project: Project){
                     btnBootstrap.className = 'btn btn-outline-secondary';
                     btnBootstrap.innerHTML = 'Done';
                     itemsLi.append(btnBootstrap);
-                    pListUL.append(itemsLi);
+                    projectListUL.append(itemsLi);
                     const hrTag = document.createElement('hr');
-                    pListUL.append(hrTag);
+                    projectListUL.append(hrTag);
+                }
+
+            }else{
+                projectListUL.innerHTML = '';
+                for (let index = 0; index < project.list.items.length; index++) {
+       
+                    const element = project.list.items[index];
+                    const itemsLi =  document.createElement('li');
+                    const spanText = document.createElement('span');
+                    spanText.innerHTML =  element;
+                    itemsLi.append(spanText);
+                    const btnBootstrap =  document.createElement('button');
+                    btnBootstrap.type = 'button';
+                    btnBootstrap.className = 'btn btn-outline-secondary';
+                    btnBootstrap.innerHTML = 'Done';
+                    itemsLi.append(btnBootstrap);
+                    projectListUL.append(itemsLi);
+                    const hrTag = document.createElement('hr');
+                    projectListUL.append(hrTag);
+                }
             }
-            
-            //return console.log('this is my projectList Div' , projectLsitDiv);
+
+
         }
-    
-    }
+
+
+    };
+    */
+
 }
 
-function listProject(project: Project ){
+
+//FUNCTION BEING CALLED FROM CREATEPAGE()
+function addList(project: Project){
     
-//The first time this function  is called its
-// its going to hit the return and end the whole function!
-        if(project.list.name == null){
-            return
-        }
-        
-//Create Project list
-        let mainDiv = document.querySelector('#main-page');
-        const projectListDiv = document.createElement('div');
-        projectListDiv.className = 'project-list';
-        const listTittleDiv = document.createElement('div');
-        listTittleDiv.className = 'list-tittle';
-        const h5ListTag = document.createElement('h5');
-        h5ListTag.innerHTML = project.list.name;
-        listTittleDiv.append(h5ListTag);
-       
-        projectListDiv.append(listTittleDiv);
-//List Input task
-        let spanInputTask = document.createElement('span');
-        spanInputTask.className = 'input-task';
-        let addTaskPlusTag = document.createElement('a');
-        addTaskPlusTag.className = "add-task-plus";
-        addTaskPlusTag.href = '#';
-        addTaskPlusTag.innerHTML = '+';
-        let inputFieldTaskTag = document.createElement('input') as HTMLInputElement;
-        inputFieldTaskTag.className = 'input-field-task';
-        inputFieldTaskTag.setAttribute('type','text');
-        inputFieldTaskTag.setAttribute('placeholder','Add task..');
-        
-        addTaskPlusTag.onclick = ()=>{
-            let listInput =  inputFieldTaskTag.value;
-           if(!project.list.items){
-                project.list.items = [];
-                project.list.items.push(listInput);
-           }else{
-            pListUL.innerHTML = '';
-            project.list.items.push(listInput);
-           }
-            
-            for (let index = 0; index < project.list.items.length; index++) {
+    console.log('w3w2w22w',project);
+    //project.list.name =  input.value;
+    //input.value = '';
 
-                const element = project.list.items[index];
-                const itemsLi =  document.createElement('li');
-                const spanText = document.createElement('span');
-                spanText.innerHTML =  element;
-                itemsLi.append(spanText);
-                const btnBootstrap =  document.createElement('button');
-                btnBootstrap.type = 'button';
-                btnBootstrap.className = 'btn btn-outline-secondary';
-                btnBootstrap.innerHTML = 'Done';
-                itemsLi.append(btnBootstrap);
-                pListUL.append(itemsLi);
-                const hrTag = document.createElement('hr');
-                pListUL.append(hrTag);
-                
-            }
-            mainDiv.append(projectListDiv);
-            inputFieldTaskTag.value = '';
-            console.log('MEU VETOR DE OBJECTO: ',projectsV);
-            return
-        }
+  
+    let mainPageDiv = document.querySelector('#project-page');
 
-        spanInputTask.append(addTaskPlusTag);
-        spanInputTask.append(inputFieldTaskTag);
-        projectListDiv.append(spanInputTask);
-    
-        let pListUL = document.querySelector('#p-list') as HTMLUListElement;
+     //Project List div    
+     const projectListDiv = document.createElement('div');
+     projectListDiv.className = 'project-list';
+     const listTittleDiv = document.createElement('div');
+     listTittleDiv.className = 'list-tittle';
+     const h5ListTag = document.createElement('h5');
+     h5ListTag.innerHTML = project.list.name;
+     //const spanTaskNumberTag = document.createElement('span');
+     //spanTaskNumberTag.className = 'task-number';
+     //spanTaskNumberTag.innerHTML = 'number of tasks here..';
+     listTittleDiv.append(h5ListTag);
+     //listTittleDiv.append(spanTaskNumberTag);
+     projectListDiv.append(listTittleDiv);
 
-        if(!pListUL){
-            pListUL = document.createElement('ul');
-            pListUL.id = 'p-list';
-            projectListDiv.append(pListUL);
-        }
+ //List Input task
+     let spanInputTask = document.createElement('span');
+     spanInputTask.className = 'input-task';
+     let addTaskPlusTag = document.createElement('a');
+     addTaskPlusTag.className = "add-task-plus";
+     addTaskPlusTag.href = '#';
+     addTaskPlusTag.innerHTML = '+';
+     let inputFieldTaskTag = document.createElement('input') as HTMLInputElement;
+     inputFieldTaskTag.className = 'input-field-task';
+     inputFieldTaskTag.setAttribute('type','text');
+     inputFieldTaskTag.setAttribute('placeholder','Create new task..');
+     spanInputTask.append(addTaskPlusTag);
+     spanInputTask.append(inputFieldTaskTag);
+     projectListDiv.append(spanInputTask);
+
+     mainPageDiv.append(projectListDiv);
+
+
+     console.log('iinput',project);
+
+}
+
+function ShowProjectList(project: Project){
 
         if(project.list.items == null){
-            mainDiv.append(projectListDiv);
-            return
-        }
+            console.log('no item in this project');
+        }else{
 
-        for (let index = 0; index < project.list.items.length; index++) {
-    
-            const element = project.list.items[index];
-            const itemsLi =  document.createElement('li');
-            const spanText = document.createElement('span');
-            spanText.innerHTML =  element;
-            itemsLi.append(spanText);
-            const btnBootstrap =  document.createElement('button');
-            btnBootstrap.type = 'button';
-            btnBootstrap.className = 'btn btn-outline-secondary';
-            btnBootstrap.innerHTML = 'Done';
-            itemsLi.append(btnBootstrap);
-            pListUL.append(itemsLi);
-            const hrTag = document.createElement('hr');
-            pListUL.append(hrTag);
+            console.log('ITEM FOUND!');
+
+                    const projectPageDiv = document.querySelector('#project-page');
+              //Project List div    
+                    const projectListDiv = document.createElement('div');
+                    projectListDiv.className = 'project-list';
+                    const listTittleDiv = document.createElement('div');
+                    listTittleDiv.className = 'list-tittle';
+                    const h5ListTag = document.createElement('h5');
+                    h5ListTag.innerHTML = project.list.name;
+                    listTittleDiv.append(h5ListTag);
+                    projectListDiv.append(listTittleDiv);
+
+                //List Input task
+                    let spanInputTask = document.createElement('span');
+                    spanInputTask.className = 'input-task';
+                    let addTaskPlusTag = document.createElement('a');
+                    addTaskPlusTag.className = "add-task-plus";
+                    addTaskPlusTag.href = '#';
+                    addTaskPlusTag.innerHTML = '+';
+                    let inputFieldTaskTag = document.createElement('input') as HTMLInputElement;
+                    inputFieldTaskTag.className = 'input-field-task';
+                    inputFieldTaskTag.setAttribute('type','text');
+                    inputFieldTaskTag.setAttribute('placeholder','Create new task..');
+                    spanInputTask.append(addTaskPlusTag);
+                    spanInputTask.append(inputFieldTaskTag);
+                    projectListDiv.append(spanInputTask);
+
+                    projectPageDiv.append(projectListDiv);
+  
+                    let projectListUL = document.createElement('ul') as HTMLUListElement;
+                    projectListUL.id = 'p-list';
+
+                for (let index = 0; index < project.list.items.length; index++) {
+                    
+                    const element = project.list.items[index];
+                    const itemsLi =  document.createElement('li');
+                    const spanText = document.createElement('span');
+                    spanText.innerHTML =  element;
+                    itemsLi.append(spanText);
+                    const btnBootstrap =  document.createElement('button');
+                    btnBootstrap.type = 'button';
+                    btnBootstrap.className = 'btn btn-outline-secondary';
+                    btnBootstrap.innerHTML = 'Done';
+                    itemsLi.append(btnBootstrap);
+                    projectListUL.append(itemsLi);
+                    const hrTag = document.createElement('hr');
+                    projectListUL.append(hrTag);
+                }
+
+
+                projectListDiv.append(projectListUL);
+                
         }
-        console.log(projectsV);
-        mainDiv.append(projectListDiv);
+        
+}
+
+function inboxPageHeaderCreation(){
+    const inboxPage = document.querySelector('.pages[id="inbox"]');
+    const pageContainerDiv = document.createElement('div');
+    pageContainerDiv.className = 'page-container';
+    const pageTittleDiv = document.createElement('div');
+    pageTittleDiv.className = 'page-tittle';
+    const pageTittleH3Tag = document.createElement('h3');
+    pageTittleH3Tag.innerHTML = 'Inbox Page';
+    pageTittleDiv.append(pageTittleH3Tag);
+ //SELECT FORM CREATION   
+    const selectForm =  document.createElement('select');
+    selectForm.className = 'custom-select mr-sm-2';
+    selectForm.id = 'inlineFormCustomSelect';
+
+    const optionFormDefault = document.createElement('option');
+    optionFormDefault.setAttribute('selected','');
+    optionFormDefault.innerHTML = 'Filter...';
+
+    const optionFormOne = document.createElement('option');
+    optionFormOne.setAttribute('value','1');
+    optionFormOne.innerHTML = 'Project Name';
+
+    const optionFormTwo = document.createElement('option');
+    optionFormTwo.setAttribute('value','2');
+    optionFormTwo.innerHTML = 'Project Date';
+
+    const optionFormThree = document.createElement('option');
+    optionFormThree.setAttribute('value','3');
+    optionFormThree.innerHTML = 'Other';
+
+    selectForm.append(optionFormDefault);
+    selectForm.append(optionFormOne);
+    selectForm.append(optionFormTwo);
+    selectForm.append(optionFormThree);
+    pageTittleDiv.append(selectForm);
+
+// END OF SELECTFORM ------   
+
+    const pageSubTittleDiv = document.createElement('div');
+    pageSubTittleDiv.className = 'page-sub-tittle';
+    const pageSubTittleH6Tag = document.createElement('h6');
+    pageSubTittleH6Tag.innerHTML = 'Your General Activities';
+    pageSubTittleDiv.append(pageSubTittleH6Tag);
     
+
+
+    pageContainerDiv.append(pageTittleDiv);
+    pageContainerDiv.append(pageSubTittleDiv);
+    inboxPage.append(pageContainerDiv);
+}
+
+function inboxPageListCreation(project: Project){
+
+    const pageContainerDiv = document.querySelector('.page-container');
+    const pageBodyDiv = document.createElement('div');
+    pageBodyDiv.className = 'page-body';
+    const ulInboxlist = document.createElement('ul');
+    ulInboxlist.className = 'inbox-list';
+   /* 
+    const liItem = document.createElement('li');
+    const mediaDiv = document.createElement('div');
+    mediaDiv.className = 'media';
+    const imgTag = document.createElement('img');
+    imgTag.className = 'mr-2 rounded';
+    imgTag.src = '';
+    imgTag.alt = 'image';
+    mediaDiv.append(imgTag);
+    const mediaBodyDiv = document.createElement('div');
+    mediaBodyDiv.className = 'media-body';
+    const listHeaderDiv = document.createElement('div');
+    listHeaderDiv.className = 'list-header';
+    const strongTag = document.createElement('strong');
+    strongTag.className = 'd-block text-gray-dark';
+    strongTag.innerHTML = project.name;
+    const spanTagDate = document.createElement('span');
+    spanTagDate.className = 'list-date';
+    spanTagDate.innerHTML = '35-10-2022';
+    const pTagListText = document.createElement('p');
+    */
+    for (let index = 0; index < project.list.items.length; index++) {
+        const element = project.list.items[index];
+        const liItem = document.createElement('li');
+        const mediaDiv = document.createElement('div');
+        mediaDiv.className = 'media';
+        const imgTag = document.createElement('img');
+        imgTag.className = 'mr-2 rounded';
+        imgTag.src = '';
+        imgTag.alt = 'image';
+        mediaDiv.append(imgTag);
+        const mediaBodyDiv = document.createElement('div');
+        mediaBodyDiv.className = 'media-body';
+        const listHeaderDiv = document.createElement('div');
+        listHeaderDiv.className = 'list-header';
+        const strongTag = document.createElement('strong');
+        strongTag.className = 'd-block text-gray-dark';
+        strongTag.innerHTML = project.name;
+        const spanTagDate = document.createElement('span');
+        spanTagDate.className = 'list-date';
+        spanTagDate.innerHTML = '35-10-2022';
+        listHeaderDiv.append(strongTag);
+        listHeaderDiv.append(spanTagDate);
+        mediaBodyDiv.append(listHeaderDiv);
+        const pTagListText = document.createElement('p');
+        pTagListText.innerHTML = element;
+        mediaBodyDiv.append(pTagListText);
+        mediaDiv.append(mediaBodyDiv);
+        liItem.append(mediaDiv);
+        ulInboxlist.append(liItem);
+    
+    }
+    /*
+    listHeaderDiv.append(strongTag);
+    listHeaderDiv.append(spanTagDate);
+    mediaBodyDiv.append(listHeaderDiv);
+    mediaBodyDiv.append(pTagListText);
+    mediaDiv.append(mediaBodyDiv);
+    */
+    //liItem.append(mediaDiv);
+    //ulInboxlist.append(liItem);
+    pageBodyDiv.append(ulInboxlist);
+    pageContainerDiv.append(pageBodyDiv);
 }
