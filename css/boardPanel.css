@@ -1,3 +1,18 @@
+.page-container {
+  margin-left: 2em;
+}
+.page-container .page-tittle {
+  display: flex;
+  justify-content: space-between;
+}
+.page-container .page-tittle .custom-select {
+  margin-top: 10px;
+  width: 21%;
+}
+.page-container .page-body {
+  margin-top: 32px;
+}
+
 .inbox-list {
   margin-top: 1em;
 }
@@ -18,6 +33,9 @@
 .inbox-list .media-body .list-header .list-date {
   color: grey;
 }
+.inbox-list .media-body p {
+  margin-left: 24px;
+}
 .inbox-list .media-body .list-text {
   margin-left: 1em;
 }
@@ -29,21 +47,6 @@
 .pages {
   border-radius: 10px;
   margin-top: 2em;
-}
-.pages .page-container {
-  margin-left: 2em;
-}
-.pages .page-container .page-tittle {
-  display: flex;
-  justify-content: space-between;
-}
-.pages .page-container .page-tittle .custom-select {
-  margin-top: 10px;
-  width: 21%;
-}
-.pages .page-container .page-body {
-  margin-top: 32px;
-  border-top: 1px solid grey;
 }
 .pages .p-tittle {
   position: absolute;

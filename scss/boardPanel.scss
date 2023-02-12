@@ -1,24 +1,11 @@
 @import "./variables.scss";
-@import "./subBoardPLists";
+@import "./inboxPage";
 .pages {
   //border: 1px dotted black;
   border-radius: 10px;
   margin-top: 2em;
-  .page-container {
-    margin-left: 2em;
-    .page-tittle {
-      display: flex;
-      justify-content: space-between;
-      .custom-select {
-        margin-top: 10px;
-        width: 21%;
-      }
-    }
-    .page-body {
-      margin-top: 32px;
-      border-top: 1px solid grey;
-    }
-  }
+ 
+
   .p-tittle {
     position: absolute;
     margin-top: 2em;

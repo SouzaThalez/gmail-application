@@ -1,4 +1,20 @@
 @import "./variables.scss";
+
+.page-container {
+  margin-left: 2em;
+  .page-tittle {
+    display: flex;
+    justify-content: space-between;
+    .custom-select {
+      margin-top: 10px;
+      width: 21%;
+    }
+  }
+  .page-body {
+    margin-top: 32px;
+    //border-top: 1px solid grey;
+  }
+}
 .inbox-list {
   margin-top: 1em;
   img {
@@ -16,6 +32,9 @@
       .list-date {
         color: grey;
       }
+    }
+    p{
+      margin-left: 24px;
     }
     .list-text {
       margin-left: 1em;

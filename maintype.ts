@@ -73,15 +73,15 @@ function saveProjects(){
             }
 
            if(projectsV[code].name){
-                console.log('has name: ',projectsV[code].name);
+                //console.log('has name: ',projectsV[code].name);
                 projectTittle(projectsV[code]);
                 if(projectsV[code].list.name){
-                    console.log('has listName: ',projectsV[code].list.name);
+                    //console.log('has listName: ',projectsV[code].list.name);
                     addList(projectsV[code]);
                     if(projectsV[code].list.items == null){
                         console.log('list item is null: ',projectsV[code].list.items)
                     }else{
-                        console.log('list item is full: ',projectsV[code].list.items)
+                        //console.log('list item is full: ',projectsV[code].list.items)
                         let projectListUL = document.querySelector('#p-list') as HTMLUListElement;
                         let projectListDiv = mainBoardPanel.querySelector('#project-page .project-list') as HTMLElement
 
@@ -126,6 +126,9 @@ function createProjects(project: Project){
     const liTag = document.createElement('li');
     liTag.setAttribute('page-code',project.code.toString());
     liTag.setAttribute('id','project-page');
+    liTag.setAttribute('data-bs-toggle','tooltip');
+    liTag.setAttribute('data-bs-placement','top');
+    liTag.setAttribute('title',project.name + '!');
     const imgTag = document.createElement('img');
     const spanlinkTag = document.createElement('span');
     imgTag.src = './icons/dot_icon.png';
@@ -408,7 +411,6 @@ function callPages(event: any){
     // Since when this function is called, new page div is created
     let pagess = document.querySelectorAll('.main-board-panel .pages');
     let menuLinks =  event.target.id;
-    
 
     pagess.forEach(element =>{
 
@@ -417,12 +419,15 @@ function callPages(event: any){
         if(menuLinks == pagesID){
             switch (menuLinks) {
                 case 'inbox':
+                    
+                    let cleanp = mainBoardPanel.querySelector('#project-page') as HTMLElement;
+                    if(cleanp == null){
+                        inboxPageHeaderCreation();
+                    }
+                    //cleanp.innerHTML = '';
                     inboxPageHeaderCreation();
                     projectsV.forEach(element => {
-                        let projectName =  element.name;
-                        let projectInfo =  element.list.items;
                         inboxPageListCreation(element);
-                        //console.log('projectName: ', projectName,'Project list: ', projectInfo);
                     });
                     element.setAttribute('style','display:block');
                     break
@@ -435,10 +440,6 @@ function callPages(event: any){
                     break 
                 case 'project-page': 
                     element.setAttribute('style','display:block');
-                    //createProjects(event.innerHTML);
-                    let addTaskPlus = document.querySelector('.project-page .add-task-plus');
-                    let addListPlus = document.querySelector('.project-page .add-list-plus');
-                    console.log('addtask + addlist tgs',addListPlus,addTaskPlus);
                     break  
             }
             
@@ -447,7 +448,7 @@ function callPages(event: any){
         }
     });
 }
-
+/*
 function ShowProjectList(project: Project){
 
         if(project.list.items == null){
@@ -510,65 +511,155 @@ function ShowProjectList(project: Project){
         }
         
 }
-
+*/
 function inboxPageHeaderCreation(){
-    const inboxPage = document.querySelector('.pages[id="inbox"]');
-    const pageContainerDiv = document.createElement('div');
-    pageContainerDiv.className = 'page-container';
-    const pageTittleDiv = document.createElement('div');
-    pageTittleDiv.className = 'page-tittle';
-    const pageTittleH3Tag = document.createElement('h3');
-    pageTittleH3Tag.innerHTML = 'Inbox Page';
-    pageTittleDiv.append(pageTittleH3Tag);
- //SELECT FORM CREATION   
-    const selectForm =  document.createElement('select');
-    selectForm.className = 'custom-select mr-sm-2';
-    selectForm.id = 'inlineFormCustomSelect';
 
-    const optionFormDefault = document.createElement('option');
-    optionFormDefault.setAttribute('selected','');
-    optionFormDefault.innerHTML = 'Filter...';
+    const inboxPage = document.querySelector('.pages[id="inbox"]') as any;
+    let pageContainer = document.querySelector('.page-container');
 
-    const optionFormOne = document.createElement('option');
-    optionFormOne.setAttribute('value','1');
-    optionFormOne.innerHTML = 'Project Name';
-
-    const optionFormTwo = document.createElement('option');
-    optionFormTwo.setAttribute('value','2');
-    optionFormTwo.innerHTML = 'Project Date';
-
-    const optionFormThree = document.createElement('option');
-    optionFormThree.setAttribute('value','3');
-    optionFormThree.innerHTML = 'Other';
-
-    selectForm.append(optionFormDefault);
-    selectForm.append(optionFormOne);
-    selectForm.append(optionFormTwo);
-    selectForm.append(optionFormThree);
-    pageTittleDiv.append(selectForm);
-
-// END OF SELECTFORM ------   
-
-    const pageSubTittleDiv = document.createElement('div');
-    pageSubTittleDiv.className = 'page-sub-tittle';
-    const pageSubTittleH6Tag = document.createElement('h6');
-    pageSubTittleH6Tag.innerHTML = 'Your General Activities';
-    pageSubTittleDiv.append(pageSubTittleH6Tag);
+    if(pageContainer == null ){
+        const pageContainerDiv = document.createElement('div');
+        pageContainerDiv.className = 'page-container';
+    }
+    else{
+       pageContainer.innerHTML = '';
+        const pageTittleDiv = document.createElement('div');
+        pageTittleDiv.className = 'page-tittle';
+        const pageTittleH3Tag = document.createElement('h3');
+        pageTittleH3Tag.innerHTML = 'Inbox Page';
+        pageTittleDiv.append(pageTittleH3Tag);
     
-
-
-    pageContainerDiv.append(pageTittleDiv);
-    pageContainerDiv.append(pageSubTittleDiv);
-    inboxPage.append(pageContainerDiv);
+     //SELECT FORM CREATION   
+        const selectForm =  document.createElement('select');
+        selectForm.className = 'custom-select mr-sm-2';
+        selectForm.id = 'inlineFormCustomSelect';
+    
+        const optionFormDefault = document.createElement('option');
+        optionFormDefault.setAttribute('selected','');
+        optionFormDefault.innerHTML = 'Filter...';
+    
+        const optionFormOne = document.createElement('option');
+        optionFormOne.setAttribute('value','1');
+        optionFormOne.innerHTML = 'Project Name';
+    
+        const optionFormTwo = document.createElement('option');
+        optionFormTwo.setAttribute('value','2');
+        optionFormTwo.innerHTML = 'Project Date';
+    
+        const optionFormThree = document.createElement('option');
+        optionFormThree.setAttribute('value','3');
+        optionFormThree.innerHTML = 'Other';
+    
+        selectForm.append(optionFormDefault);
+        selectForm.append(optionFormOne);
+        selectForm.append(optionFormTwo);
+        selectForm.append(optionFormThree);
+        pageTittleDiv.append(selectForm);
+    
+    // END OF SELECTFORM ------   
+    
+        const pageSubTittleDiv = document.createElement('div');
+        pageSubTittleDiv.className = 'page-sub-tittle';
+        const pageSubTittleH6Tag = document.createElement('h6');
+        pageSubTittleH6Tag.innerHTML = 'All your tasks: ';
+        pageSubTittleDiv.append(pageSubTittleH6Tag);
+        
+    
+    
+        pageContainer.append(pageTittleDiv);
+        pageContainer.append(pageSubTittleDiv);
+        inboxPage.append(pageContainer);
+    }
+ 
 }
 
 function inboxPageListCreation(project: Project){
 
-    const pageContainerDiv = document.querySelector('.page-container');
-    const pageBodyDiv = document.createElement('div');
-    pageBodyDiv.className = 'page-body';
-    const ulInboxlist = document.createElement('ul');
-    ulInboxlist.className = 'inbox-list';
+    const pageContainerDiv = document.querySelector('.page-container') as any;
+
+    let pageBody = pageContainerDiv.querySelector('.page-body');
+    let inBoxList = document.querySelector('.page-container .inbox-list') as any;
+
+    if(pageBody == null){
+    
+        const pageBodyDiv = document.createElement('div');
+        pageBodyDiv.className = 'page-body';
+        const ulInboxlist = document.createElement('ul') as HTMLUListElement;
+        ulInboxlist.className = 'inbox-list';
+        pageBodyDiv.append(ulInboxlist);
+    
+        for (let index = 0; index < project.list.items.length; index++) {
+
+            const element = project.list.items[index];
+
+            const liItem = document.createElement('li');
+            const mediaDiv = document.createElement('div');
+            mediaDiv.className = 'media';
+            const mediaBodyDiv = document.createElement('div');
+            mediaBodyDiv.className = 'media-body';
+            const listHeaderDiv = document.createElement('div');
+            listHeaderDiv.className = 'list-header';
+            const strongTag = document.createElement('strong');
+            strongTag.className = 'd-block text-gray-dark';
+            strongTag.innerHTML = project.name;
+            const spanTagDate = document.createElement('span');
+            spanTagDate.className = 'list-date';
+            spanTagDate.innerHTML = '35-10-2022';
+            listHeaderDiv.append(strongTag);
+            listHeaderDiv.append(spanTagDate);
+            mediaBodyDiv.append(listHeaderDiv);
+            const pTagListText = document.createElement('p');
+            pTagListText.innerHTML = element;
+            mediaBodyDiv.append(pTagListText);
+            mediaDiv.append(mediaBodyDiv);
+            liItem.append(mediaDiv);
+            ulInboxlist.append(liItem);
+        
+        }
+        pageContainerDiv.append(pageBodyDiv);
+
+    }else{
+
+        for (let index = 0; index < project.list.items.length; index++) {
+
+            const element = project.list.items[index];
+            const liItem = document.createElement('li');
+            
+            const mediaDiv = document.createElement('div');
+            mediaDiv.className = 'media';
+            /*
+            const imgTag = document.createElement('img');
+            imgTag.className = 'mr-2 rounded';
+            imgTag.src = '';
+            imgTag.alt = 'image';
+            mediaDiv.append(imgTag);
+            */
+            const mediaBodyDiv = document.createElement('div');
+            mediaBodyDiv.className = 'media-body';
+            const listHeaderDiv = document.createElement('div');
+            listHeaderDiv.className = 'list-header';
+            const strongTag = document.createElement('strong');
+            strongTag.className = 'd-block text-gray-dark';
+            strongTag.innerHTML = project.name;
+            const spanTagDate = document.createElement('span');
+            spanTagDate.className = 'list-date';
+            spanTagDate.innerHTML = '35-10-2022';
+            listHeaderDiv.append(strongTag);
+            listHeaderDiv.append(spanTagDate);
+            mediaBodyDiv.append(listHeaderDiv);
+            const pTagListText = document.createElement('p');
+            pTagListText.innerHTML = element;
+            mediaBodyDiv.append(pTagListText);
+            mediaDiv.append(mediaBodyDiv);
+            liItem.append(mediaDiv);
+            inBoxList.append(liItem);
+        
+        }
+        pageBody.append(inBoxList);
+        pageContainerDiv.append(pageBody);
+    }
+
+   
    /* 
     const liItem = document.createElement('li');
     const mediaDiv = document.createElement('div');
@@ -590,16 +681,21 @@ function inboxPageListCreation(project: Project){
     spanTagDate.innerHTML = '35-10-2022';
     const pTagListText = document.createElement('p');
     */
+   /*
     for (let index = 0; index < project.list.items.length; index++) {
+
         const element = project.list.items[index];
         const liItem = document.createElement('li');
+        
         const mediaDiv = document.createElement('div');
         mediaDiv.className = 'media';
+       
         const imgTag = document.createElement('img');
         imgTag.className = 'mr-2 rounded';
         imgTag.src = '';
         imgTag.alt = 'image';
         mediaDiv.append(imgTag);
+    
         const mediaBodyDiv = document.createElement('div');
         mediaBodyDiv.className = 'media-body';
         const listHeaderDiv = document.createElement('div');
@@ -618,18 +714,18 @@ function inboxPageListCreation(project: Project){
         mediaBodyDiv.append(pTagListText);
         mediaDiv.append(mediaBodyDiv);
         liItem.append(mediaDiv);
-        ulInboxlist.append(liItem);
+        inBoxList.append(liItem);
     
     }
-    /*
-    listHeaderDiv.append(strongTag);
-    listHeaderDiv.append(spanTagDate);
-    mediaBodyDiv.append(listHeaderDiv);
-    mediaBodyDiv.append(pTagListText);
-    mediaDiv.append(mediaBodyDiv);
     */
+    //listHeaderDiv.append(strongTag);
+    //listHeaderDiv.append(spanTagDate);
+    //mediaBodyDiv.append(listHeaderDiv);
+    //mediaBodyDiv.append(pTagListText);
+    //mediaDiv.append(mediaBodyDiv);
+
     //liItem.append(mediaDiv);
     //ulInboxlist.append(liItem);
-    pageBodyDiv.append(ulInboxlist);
-    pageContainerDiv.append(pageBodyDiv);
+    //pageBody.append(inBoxList);
+    //pageContainerDiv.append(pageBody);
 }
