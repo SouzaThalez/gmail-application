@@ -39,49 +39,53 @@ function saveProjects() {
     var projectUlElements = ulProjectList.querySelectorAll('li');
     projectUlElements.forEach(function (element) {
         element.onclick = function () {
-            createPage(modal);
-            console.log('swswsw', element);
-            //callPages(element);
-        };
-    });
-}
-function callPages(event) {
-    //Second selection of pages 
-    // Since when this function is called, new page div is created
-    var pagess = document.querySelectorAll('.main-board-panel .pages');
-    var menuLinks = event.target.id;
-    pagess.forEach(function (element) {
-        var pagesID = element.id;
-        if (menuLinks == pagesID) {
-            switch (menuLinks) {
-                case 'inbox':
-                    inboxPageHeaderCreation();
-                    projectsV.forEach(function (element) {
-                        var projectName = element.name;
-                        var projectInfo = element.list.items;
-                        inboxPageListCreation(element);
-                        //console.log('projectName: ', projectName,'Project list: ', projectInfo);
-                    });
-                    element.setAttribute('style', 'display:block');
-                    break;
-                case 'today':
-                    element.setAttribute('style', 'display:block');
-                    break;
-                case 'upcoming':
-                    element.setAttribute('style', 'display:block');
-                    break;
-                case 'project-page':
-                    element.setAttribute('style', 'display:block');
-                    //createProjects(event.innerHTML);
-                    var addTaskPlus = document.querySelector('.project-page .add-task-plus');
-                    var addListPlus = document.querySelector('.project-page .add-list-plus');
-                    console.log('addtask + addlist tgs', addListPlus, addTaskPlus);
-                    break;
+            //referecing my object through code!!!!
+            var pageCodeAttr = element.getAttribute('page-code');
+            var code = parseInt(pageCodeAttr, 10);
+            var cleanp = mainBoardPanel.querySelector('#project-page');
+            //remove projects class before adding
+            if (cleanp != null) {
+                cleanp.remove();
             }
-        }
-        else {
-            element.setAttribute('style', 'display:none');
-        }
+            if (projectsV[code].name) {
+                console.log('has name: ', projectsV[code].name);
+                projectTittle(projectsV[code]);
+                if (projectsV[code].list.name) {
+                    console.log('has listName: ', projectsV[code].list.name);
+                    addList(projectsV[code]);
+                    if (projectsV[code].list.items == null) {
+                        console.log('list item is null: ', projectsV[code].list.items);
+                    }
+                    else {
+                        console.log('list item is full: ', projectsV[code].list.items);
+                        var projectListUL_1 = document.querySelector('#p-list');
+                        var projectListDiv = mainBoardPanel.querySelector('#project-page .project-list');
+                        if (projectListUL_1 == null) {
+                            projectListUL_1 = document.createElement('ul');
+                            projectListUL_1.id = 'p-list';
+                            projectListDiv.append(projectListUL_1);
+                        }
+                        projectsV[code].list.items.forEach(function (listElement) {
+                            var itemsLi = document.createElement('li');
+                            var spanText = document.createElement('span');
+                            spanText.innerHTML = listElement;
+                            itemsLi.append(spanText);
+                            var btnBootstrap = document.createElement('button');
+                            btnBootstrap.type = 'button';
+                            btnBootstrap.className = 'btn btn-outline-secondary';
+                            btnBootstrap.innerHTML = 'Done';
+                            itemsLi.append(btnBootstrap);
+                            projectListUL_1.append(itemsLi);
+                            var hrTag = document.createElement('hr');
+                            projectListUL_1.append(hrTag);
+                        });
+                    }
+                }
+            }
+            else {
+                console.log('project doesnt have name nor listName');
+            }
+        };
     });
 }
 function createProjects(project) {
@@ -110,13 +114,13 @@ function createProjects(project) {
             if(projectPage != null){
                 projectPage.remove();
             }
-            createPage(model);
+            projectTittle(model);
             ShowProjectList(model);
     
         });
         */
 }
-function createPage(project) {
+function projectTittle(project) {
     //Project Tittle
     var mainPageDiv = document.createElement('div');
     mainPageDiv.className = 'pages';
@@ -132,8 +136,6 @@ function createPage(project) {
     spanInputList.className = 'input-list';
     var addListPlusTag = document.createElement('a');
     addListPlusTag.className = "add-list-plus";
-    //addListPlusTag.href = 'myfunction()';
-    addListPlusTag.setAttribute('onclick', 'addList(project)');
     addListPlusTag.innerHTML = '+';
     spanInputList.append(addListPlusTag);
     var inputFieldListTag = document.createElement('input');
@@ -143,12 +145,17 @@ function createPage(project) {
     spanInputList.append(inputFieldListTag);
     mainPageDiv.append(spanInputList);
     mainBoardPanel.append(mainPageDiv);
+    addListPlusTag.onclick = function () {
+        project.list.name = inputFieldListTag.value;
+        inputFieldListTag.value = '';
+        addList(project);
+    };
     /*
         addListPlusTag.onclick = ()=>{
             
             project.list.name =  inputFieldListTag.value;
             inputFieldListTag.value = '';
-            //createPage(project);
+            //projectTittle(project);
             //mainPageDiv.remove();
     
         //Project List div
@@ -245,12 +252,9 @@ function createPage(project) {
         };
         */
 }
-//FUNCTION BEING CALLED FROM CREATEPAGE()
+//FUNCTION BEING CALLED FROM projectTittle()
 function addList(project) {
-    console.log('w3w2w22w', project);
-    //project.list.name =  input.value;
-    //input.value = '';
-    var mainPageDiv = document.querySelector('#project-page');
+    var mainPageDiv = document.querySelector('.main-board-panel #project-page');
     //Project List div    
     var projectListDiv = document.createElement('div');
     projectListDiv.className = 'project-list';
@@ -279,7 +283,97 @@ function addList(project) {
     spanInputTask.append(inputFieldTaskTag);
     projectListDiv.append(spanInputTask);
     mainPageDiv.append(projectListDiv);
-    console.log('iinput', project);
+    addTaskPlusTag.onclick = function () {
+        var taskInput = inputFieldTaskTag.value;
+        inputFieldTaskTag.value = '';
+        //My projectList.itemsV model has to be created first
+        //Before assign it a value
+        if (project.list.items == null) {
+            project.list.items = [];
+        }
+        project.list.items.push(taskInput);
+        // ADDIG ITEMS TO THE LIST 
+        var projectListUL = document.querySelector('#p-list');
+        //Project list will not exist, first time
+        //If project list does not exist, create.
+        if (projectListUL == null) {
+            projectListUL = document.createElement('ul');
+            projectListUL.id = 'p-list';
+            projectListDiv.append(projectListUL);
+            for (var index = 0; index < project.list.items.length; index++) {
+                var element = project.list.items[index];
+                var itemsLi = document.createElement('li');
+                var spanText = document.createElement('span');
+                spanText.innerHTML = element;
+                itemsLi.append(spanText);
+                var btnBootstrap = document.createElement('button');
+                btnBootstrap.type = 'button';
+                btnBootstrap.className = 'btn btn-outline-secondary';
+                btnBootstrap.innerHTML = 'Done';
+                itemsLi.append(btnBootstrap);
+                projectListUL.append(itemsLi);
+                var hrTag = document.createElement('hr');
+                projectListUL.append(hrTag);
+            }
+        }
+        else {
+            projectListUL.innerHTML = '';
+            for (var index = 0; index < project.list.items.length; index++) {
+                var element = project.list.items[index];
+                var itemsLi = document.createElement('li');
+                var spanText = document.createElement('span');
+                spanText.innerHTML = element;
+                itemsLi.append(spanText);
+                var btnBootstrap = document.createElement('button');
+                btnBootstrap.type = 'button';
+                btnBootstrap.className = 'btn btn-outline-secondary';
+                btnBootstrap.innerHTML = 'Done';
+                itemsLi.append(btnBootstrap);
+                projectListUL.append(itemsLi);
+                var hrTag = document.createElement('hr');
+                projectListUL.append(hrTag);
+            }
+        }
+    };
+}
+function callPages(event) {
+    //Second selection of pages 
+    // Since when this function is called, new page div is created
+    var pagess = document.querySelectorAll('.main-board-panel .pages');
+    var menuLinks = event.target.id;
+    pagess.forEach(function (element) {
+        var pagesID = element.id;
+        if (menuLinks == pagesID) {
+            switch (menuLinks) {
+                case 'inbox':
+                    inboxPageHeaderCreation();
+                    projectsV.forEach(function (element) {
+                        var projectName = element.name;
+                        var projectInfo = element.list.items;
+                        inboxPageListCreation(element);
+                        //console.log('projectName: ', projectName,'Project list: ', projectInfo);
+                    });
+                    element.setAttribute('style', 'display:block');
+                    break;
+                case 'today':
+                    element.setAttribute('style', 'display:block');
+                    break;
+                case 'upcoming':
+                    element.setAttribute('style', 'display:block');
+                    break;
+                case 'project-page':
+                    element.setAttribute('style', 'display:block');
+                    //createProjects(event.innerHTML);
+                    var addTaskPlus = document.querySelector('.project-page .add-task-plus');
+                    var addListPlus = document.querySelector('.project-page .add-list-plus');
+                    console.log('addtask + addlist tgs', addListPlus, addTaskPlus);
+                    break;
+            }
+        }
+        else {
+            element.setAttribute('style', 'display:none');
+        }
+    });
 }
 function ShowProjectList(project) {
     if (project.list.items == null) {

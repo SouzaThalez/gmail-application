@@ -23,7 +23,7 @@
 }
 .side-panel .main-menu-list .list-item:hover {
   cursor: pointer;
-  background-color: #d1d1d1;
+  background-color: rgb(209, 209, 209);
   border-radius: 8%;
   border-top-right-radius: 280px;
   border-bottom-right-radius: 200px;
@@ -50,19 +50,16 @@
 .side-panel .costumes-container .projects-list li {
   padding: 10px;
 }
-.side-panel .costumes-container .projects-list li:hover {
-  cursor: pointer;
-  background-color: #d1d1d1;
-  border-radius: 8%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-.side-panel .costumes-container .projects-list a {
+.side-panel .costumes-container .projects-list li span {
   margin-left: 10px;
   color: grey;
 }
-.side-panel .costumes-container .projects-list a:hover {
-  text-decoration: none;
+.side-panel .costumes-container .projects-list li:hover {
+  cursor: pointer;
+  background-color: rgb(209, 209, 209);
+  border-radius: 8%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .side-panel .modal-body input {
   border: none;

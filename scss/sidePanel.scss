@@ -48,20 +48,17 @@
       margin-top: 8px;
       li {
         padding: 10px;
-      }
-      li:hover {
-        cursor: pointer;
-        background-color: $hoverItemsColor;
-        border-radius: 8%;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-      }
-      a {
-        margin-left: 10px;
-        color: grey;
-      }
-      a:hover {
-        text-decoration: none;
+        span {
+          margin-left: 10px;
+          color: grey;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: $hoverItemsColor;
+          border-radius: 8%;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+        }
       }
     }
   }

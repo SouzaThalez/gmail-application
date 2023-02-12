@@ -28,6 +28,14 @@
     position: absolute;
     margin-left: 3em;
     margin-top: 4.5em;
+    .add-list-plus{
+      font-size: 30px;
+      margin-left: 10px;
+      position: relative;
+      top: 4px;
+      color: $navbarBackgroundColor;
+      cursor: pointer;
+    }
     .input-field-list {
       border: none;
       margin-left: 1em;
@@ -43,6 +51,14 @@
       position: absolute;
       margin-left: 3em;
       margin-top: 13em;
+      .add-task-plus{
+        font-size: 30px;
+        margin-left: 10px;
+        position: relative;
+        top: 4px;
+        color: $navbarBackgroundColor;
+        cursor: pointer;
+      }
       .input-field-task {
         border: none;
         margin-left: 1em;
@@ -56,12 +72,19 @@
         display: flex;
         width: 500px;
         justify-content: space-between;
+        padding: 10px;
+        &:hover{
+          cursor: pointer;
+          background-color: rgb(238, 238, 238);
+          border-radius: 10px;
+        }
+        .btn:hover{
+          background-color: $navbarBackgroundColor;
+        }
       }
-      li:hover {
-        cursor: pointer;
-        background-color: rgb(238, 238, 238);
-        border-radius: 5%;
-      }
+     
     }
   }
+
+
 }

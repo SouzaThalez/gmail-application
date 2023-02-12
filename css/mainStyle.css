@@ -35,7 +35,7 @@
 }
 .side-panel .main-menu-list .list-item:hover {
   cursor: pointer;
-  background-color: #d1d1d1;
+  background-color: rgb(209, 209, 209);
   border-radius: 8%;
   border-top-right-radius: 280px;
   border-bottom-right-radius: 200px;
@@ -62,19 +62,16 @@
 .side-panel .costumes-container .projects-list li {
   padding: 10px;
 }
-.side-panel .costumes-container .projects-list li:hover {
-  cursor: pointer;
-  background-color: #d1d1d1;
-  border-radius: 8%;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-.side-panel .costumes-container .projects-list a {
+.side-panel .costumes-container .projects-list li span {
   margin-left: 10px;
   color: grey;
 }
-.side-panel .costumes-container .projects-list a:hover {
-  text-decoration: none;
+.side-panel .costumes-container .projects-list li:hover {
+  cursor: pointer;
+  background-color: rgb(209, 209, 209);
+  border-radius: 8%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 .side-panel .modal-body input {
   border: none;
@@ -104,7 +101,7 @@
   margin-left: 1em;
 }
 .inbox-list li:hover {
-  background-color: #d1d1d1;
+  background-color: rgb(209, 209, 209);
   cursor: pointer;
 }
 
@@ -137,6 +134,14 @@
   margin-left: 3em;
   margin-top: 4.5em;
 }
+.pages .input-list .add-list-plus {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+  color: #c95549;
+  cursor: pointer;
+}
 .pages .input-list .input-field-list {
   border: none;
   margin-left: 1em;
@@ -151,6 +156,14 @@
   margin-left: 3em;
   margin-top: 13em;
 }
+.pages .project-list .input-task .add-task-plus {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+  color: #c95549;
+  cursor: pointer;
+}
 .pages .project-list .input-task .input-field-task {
   border: none;
   margin-left: 1em;
@@ -164,11 +177,15 @@
   display: flex;
   width: 500px;
   justify-content: space-between;
+  padding: 10px;
 }
 .pages .project-list #p-list li:hover {
   cursor: pointer;
-  background-color: #eeeeee;
-  border-radius: 5%;
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+}
+.pages .project-list #p-list li .btn:hover {
+  background-color: #c95549;
 }
 
 .navbar {
@@ -188,8 +205,8 @@
 .navbar .search-input {
   width: 212px;
   margin-left: -49em;
-  background-color: #cfc9c96b;
-  border: 1px solid #80808008;
+  background-color: rgba(207, 201, 201, 0.4196078431);
+  border: 1px solid rgba(128, 128, 128, 0.031372549);
   color: white;
 }
 

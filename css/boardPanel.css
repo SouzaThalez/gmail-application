@@ -22,7 +22,7 @@
   margin-left: 1em;
 }
 .inbox-list li:hover {
-  background-color: #d1d1d1;
+  background-color: rgb(209, 209, 209);
   cursor: pointer;
 }
 
@@ -55,6 +55,14 @@
   margin-left: 3em;
   margin-top: 4.5em;
 }
+.pages .input-list .add-list-plus {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+  color: #c95549;
+  cursor: pointer;
+}
 .pages .input-list .input-field-list {
   border: none;
   margin-left: 1em;
@@ -69,6 +77,14 @@
   margin-left: 3em;
   margin-top: 13em;
 }
+.pages .project-list .input-task .add-task-plus {
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
+  color: #c95549;
+  cursor: pointer;
+}
 .pages .project-list .input-task .input-field-task {
   border: none;
   margin-left: 1em;
@@ -82,11 +98,15 @@
   display: flex;
   width: 500px;
   justify-content: space-between;
+  padding: 10px;
 }
 .pages .project-list #p-list li:hover {
   cursor: pointer;
-  background-color: #eeeeee;
-  border-radius: 5%;
+  background-color: rgb(238, 238, 238);
+  border-radius: 10px;
+}
+.pages .project-list #p-list li .btn:hover {
+  background-color: #c95549;
 }
 
 /*# sourceMappingURL=boardPanel.css.map */
